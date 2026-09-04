@@ -164,12 +164,11 @@ function Index() {
         <div className="mx-auto max-w-4xl text-center">
           <Pill>117 exercícios de mobilidade e estabilidade</Pill>
           <h2 className="mt-8 text-3xl font-extrabold leading-tight md:text-5xl">
-            Mais mobilidade e estabilidade para treinar sem depender de rotinas
-            improvisadas.
+            Mais mobilidade e estabilidade para treinar sem depender de rotinas improvisadas.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-bold text-primary">
-            Consulte exercícios organizados por categoria, com séries, repetições e
-            descanso reunidos num material visual.
+            Consulte exercícios organizados por categoria, com séries, repetições e descanso
+            reunidos num material visual.
           </p>
         </div>
 
@@ -178,8 +177,8 @@ function Index() {
             O que vai encontrar neste material
           </h3>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Material disponibilizado em PDF com exercícios independentes, sem repetição,
-            organizados por categoria.
+            Material disponibilizado em PDF com exercícios independentes, sem repetição, organizados
+            por categoria.
           </p>
           <p className="mt-6 text-lg font-extrabold text-primary">
             Exercícios por categoria, com séries, repetições e descanso
@@ -216,16 +215,12 @@ function Index() {
             +3 Bónus Exclusivos Para Quem Adquirir Hoje
           </h2>
           <p className="mt-4 text-lg opacity-70">
-            Além do material principal, recebe acesso imediato a estes bónus
-            incríveis.
+            Além do material principal, recebe acesso imediato a estes bónus incríveis.
           </p>
 
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {bonus.map((b) => (
-              <article
-                key={b.title}
-                className="overflow-hidden rounded-2xl bg-surface shadow-lg"
-              >
+              <article key={b.title} className="overflow-hidden rounded-2xl bg-surface shadow-lg">
                 <div className="relative">
                   <img
                     src={b.img}
@@ -264,9 +259,7 @@ function Index() {
       <section id="planos" className="bg-background px-6 py-24 text-foreground md:py-32">
         <div className="mx-auto max-w-5xl text-center">
           <Pill>Escolha o seu plano</Pill>
-          <h2 className="mt-6 text-4xl font-extrabold md:text-5xl">
-            Escolha o seu plano
-          </h2>
+          <h2 className="mt-6 text-4xl font-extrabold md:text-5xl">Escolha o seu plano</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg opacity-70">
             Acesso imediato após a confirmação do pagamento.
           </p>
@@ -281,7 +274,9 @@ function Index() {
                   Plano Básico
                 </p>
                 <p className="mt-2 text-3xl font-extrabold md:text-4xl">19,90 €</p>
-                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">47,00 €</p>
+                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">
+                  47,00 €
+                </p>
               </div>
               <div className="relative px-4 pb-6 pt-10 text-center md:px-8">
                 <span className="absolute left-1/2 top-3 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[10px] font-extrabold uppercase text-primary-foreground md:text-xs">
@@ -291,7 +286,9 @@ function Index() {
                   Plano Premium
                 </p>
                 <p className="mt-2 text-3xl font-extrabold md:text-4xl">27,90 €</p>
-                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">97,00 €</p>
+                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">
+                  97,00 €
+                </p>
               </div>
             </div>
 
@@ -340,8 +337,7 @@ function Index() {
           </div>
 
           <p className="mx-auto mt-10 max-w-2xl text-xl font-bold text-primary">
-            Por apenas mais 8,00 €, leva os 3 bónus completos. A maioria escolhe o
-            Premium.
+            Por apenas mais 8,00 €, leva os 3 bónus completos. A maioria escolhe o Premium.
           </p>
         </div>
       </section>
@@ -369,8 +365,8 @@ function Index() {
       <Faq />
 
       <footer className="bg-ink px-6 py-10 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} 117 Exercícios de Mobilidade e Estabilidade. Todos os
-        direitos reservados.
+        © {new Date().getFullYear()} 117 Exercícios de Mobilidade e Estabilidade. Todos os direitos
+        reservados.
       </footer>
     </main>
   );

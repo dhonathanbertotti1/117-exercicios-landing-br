@@ -127,9 +127,7 @@ export function SalesNotification() {
   }, [phase]);
 
   const translateClass =
-    phase === "entering" || phase === "visible"
-      ? "translate-x-0"
-      : "-translate-x-[120%]";
+    phase === "entering" || phase === "visible" ? "translate-x-0" : "-translate-x-[120%]";
 
   const opacityClass = phase === "hidden" ? "opacity-0" : "opacity-100";
 
@@ -149,9 +147,7 @@ export function SalesNotification() {
           <p className="text-sm font-bold text-card-foreground">
             <span className="text-primary">{notification.name}</span> acabou de comprar
           </p>
-          <p className="mt-0.5 text-xs font-extrabold text-primary">
-            {notification.packageName}
-          </p>
+          <p className="mt-0.5 text-xs font-extrabold text-primary">{notification.packageName}</p>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
             <span className="inline-flex items-center gap-1">
               <Clock className="size-3 text-primary" />

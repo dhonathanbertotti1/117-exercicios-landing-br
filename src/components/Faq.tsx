@@ -49,19 +49,14 @@ export function Faq() {
           <h2 id="faq-titulo" className="mt-6 text-3xl font-extrabold md:text-4xl">
             Perguntas frequentes
           </h2>
-          <p className="mt-3 opacity-70">
-            Tudo o que precisa de saber antes de começar.
-          </p>
+          <p className="mt-3 opacity-70">Tudo o que precisa de saber antes de começar.</p>
         </div>
 
         <div className="mt-10 space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div
-                key={f.q}
-                className="overflow-hidden rounded-xl bg-surface shadow-sm"
-              >
+              <div key={f.q} className="overflow-hidden rounded-xl bg-surface shadow-sm">
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -83,9 +78,7 @@ export function Faq() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-5 text-sm leading-relaxed opacity-75">
-                      {f.a}
-                    </p>
+                    <p className="px-6 pb-5 text-sm leading-relaxed opacity-75">{f.a}</p>
                   </div>
                 </div>
               </div>

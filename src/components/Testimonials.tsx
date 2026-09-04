@@ -102,9 +102,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       <div className="mt-4">
         <Stars count={t.stars} />
       </div>
-      <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-        “{t.text}”
-      </p>
+      <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">“{t.text}”</p>
     </article>
   );
 }
