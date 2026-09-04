@@ -31,7 +31,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Variáveis de ambiente (nunca versionar)
+# Variáveis de ambiente
 .env
 .env.*
-!.env.example
