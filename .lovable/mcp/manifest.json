@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "sdk_version": "1.0.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://vskqrsvwkwgayyimxlif.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "mirror-site-builder",
+      "version": "0.1.0",
+      "title": "Mirror Site Builder"
+    },
+    "tools": [
+      {
+        "name": "get_offer",
+        "title": "Get offer details",
+        "description": "Return the public offer details of the landing page: product summary, highlights, exercise categories, bonuses and the refund guarantee.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "product": {}
+          },
+          "required": [
+            "product"
+          ]
+        }
+      },
+      {
+        "name": "list_plans",
+        "title": "List plans",
+        "description": "List the available purchase plans with their price, what each one includes and the public checkout link.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "plans": {}
+          },
+          "required": [
+            "plans"
+          ]
+        }
+      },
+      {
+        "name": "search_faq",
+        "title": "Search FAQ",
+        "description": "Search the public frequently asked questions of the landing page. Omit the query to get every question and answer.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Optional text to match against questions and answers.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "results": {},
+            "count": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "results",
+            "count"
+          ]
+        }
+      }
+    ]
+  }
+}
