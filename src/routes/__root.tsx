@@ -109,6 +109,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 /** ID do pixel da UTMify — trocar aqui se mudar de conta. */
 const UTMIFY_PIXEL_ID = "6a79d28aa0ad9f761f62d004";
 
+/** ID do Meta Pixel (Facebook / Instagram Ads). */
+const META_PIXEL_ID = "1749312022956542";
+
 /** ID do projeto no Microsoft Clarity. */
 const CLARITY_PROJECT_ID = "ycr2wysyw2";
 
@@ -129,6 +132,18 @@ function RootShell({ children }: { children: ReactNode }) {
           data-utmify-prevent-subids=""
           async
           defer
+        />
+
+        {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`,
+          }}
+        />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1" alt="" />`,
+          }}
         />
 
         {/* Microsoft Clarity — mapas de calor e gravação de sessões. */}
