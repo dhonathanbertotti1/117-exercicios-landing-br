@@ -60,6 +60,18 @@ src/
 | Cores e tipografia                           | `src/styles.css`                                                  |
 | Título e descrição para Google/redes sociais | `src/routes/index.tsx`, bloco `head`                              |
 
+## Identidade visual
+
+O favicon é um arco aberto (mobilidade) à volta de um núcleo sólido (estabilidade), nas cores do site: navy `#081221` e teal `#00b19a`.
+
+| Ficheiro | Uso |
+| --- | --- |
+| `public/favicon.svg` | Browsers modernos — vetorial, nítido em qualquer ecrã |
+| `public/favicon.ico` | Fallback, com 16/32/48/64/128/256px |
+| `public/apple-touch-icon.png` | Ecrã inicial do iOS (180px) |
+
+Estão ligados em `src/routes/__root.tsx`, no bloco `links`. Para os regerar, edite o `favicon.svg` e exporte os restantes a partir dele.
+
 ## Tracking
 
 Os scripts de análise estão em `src/routes/__root.tsx`, no topo do `RootShell`:
