@@ -64,13 +64,26 @@ src/
 
 O favicon é um arco aberto (mobilidade) à volta de um núcleo sólido (estabilidade), nas cores do site: navy `#081221` e teal `#00b19a`.
 
-| Ficheiro | Uso |
-| --- | --- |
-| `public/favicon.svg` | Browsers modernos — vetorial, nítido em qualquer ecrã |
-| `public/favicon.ico` | Fallback, com 16/32/48/64/128/256px |
-| `public/apple-touch-icon.png` | Ecrã inicial do iOS (180px) |
+| Ficheiro                      | Uso                                                   |
+| ----------------------------- | ----------------------------------------------------- |
+| `public/favicon.svg`          | Browsers modernos — vetorial, nítido em qualquer ecrã |
+| `public/favicon.ico`          | Fallback, com 16/32/48/64/128/256px                   |
+| `public/apple-touch-icon.png` | Ecrã inicial do iOS (180px)                           |
 
 Estão ligados em `src/routes/__root.tsx`, no bloco `links`. Para os regerar, edite o `favicon.svg` e exporte os restantes a partir dele.
+
+## Mockup animado do hero
+
+O livro no hero é a fotografia `src/assets/ebook-cover-3d.jpg` tratada como objeto 3D, em `src/components/HeroBook.tsx`:
+
+- **levitação** contínua de 20px, com a sombra no chão a encolher e desvanecer à medida que o livro sobe;
+- **inclinação** que segue o cursor (`rotateX`/`rotateY` via variáveis CSS, atualizadas em `requestAnimationFrame`);
+- **aura** teal pulsante por trás, a ecoar os anéis de néon da capa;
+- **selo dos 92%** à frente no eixo Z e fora de fase, para os planos não se moverem em bloco.
+
+A fotografia tem o fundo quase preto: o `mix-blend-mode: screen` funde-o com o fundo da secção e as máscaras em gradiente esbatem as quatro arestas, para não se ver o retângulo do enquadramento. O ficheiro `ebook-cover.jpg` é o original sem recorte, mantido como fonte.
+
+Quem tiver "reduzir movimento" ativo no sistema vê tudo estático, sem perder o aspeto final. Em ecrãs táteis não há inclinação.
 
 ## Tracking
 

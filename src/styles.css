@@ -174,3 +174,172 @@
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+/* ---------------------------------------------------------------------------
+ * Mockup animado do livro (hero) — ver src/components/HeroBook.tsx
+ * ------------------------------------------------------------------------ */
+
+.hero-book {
+  position: relative;
+  perspective: 1400px;
+}
+
+.hero-book__tilt {
+  position: relative;
+  transform: rotateX(var(--book-rx, 0deg)) rotateY(var(--book-ry, 0deg));
+  transform-style: preserve-3d;
+  /* Longo e com saída suave: o livro "assenta" em vez de saltar atrás do rato. */
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  animation: book-enter 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Halo teal por trás, a ecoar os anéis de néon da própria capa. */
+.hero-book__aura {
+  position: absolute;
+  inset: 6% -16% 8%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    oklch(0.68 0.126 179 / 0.42) 0%,
+    oklch(0.68 0.126 179 / 0.18) 50%,
+    transparent 75%
+  );
+  filter: blur(64px);
+  transform: translateZ(-60px);
+  animation: book-aura 7s ease-in-out infinite;
+}
+
+.hero-book__float {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: book-float 6s ease-in-out infinite;
+}
+
+.hero-book__cover {
+  display: block;
+  width: 100%;
+  /* O fundo quase preto da fotografia funde-se com o fundo da secção, o que
+   * dispensa recortar o livro e faz a levitação parecer real. */
+  mix-blend-mode: screen;
+  /* Esbate as quatro arestas da fotografia, senao ve-se o retangulo do
+   * enquadramento. No recorte, o livro ocupa 3.7%-94% na horizontal e
+   * 0.7%-95% na vertical, por isso as faixas de esbatimento so apanham fundo. */
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 4%, #000 94.5%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 1.2%, #000 93%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  filter: drop-shadow(0 28px 45px oklch(0 0 0 / 0.55));
+}
+
+/* Sombra no chão: encolhe e desvanece à medida que o livro sobe. */
+.hero-book__shadow {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  height: 26px;
+  width: 64%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, oklch(0 0 0 / 0.65) 0%, transparent 72%);
+  filter: blur(14px);
+  transform: translateX(-50%) translateZ(-80px);
+  animation: book-shadow 6s ease-in-out infinite;
+}
+
+.hero-book__badge {
+  position: absolute;
+  top: -1rem;
+  right: -0.5rem;
+  display: flex;
+  height: 6rem;
+  width: 6rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  box-shadow: 0 12px 30px oklch(0 0 0 / 0.45);
+  /* À frente do livro no espaço 3D e fora de fase com a levitação, para os dois
+   * planos não se moverem em bloco. */
+  transform: translateZ(70px);
+  animation: book-badge 6s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .hero-book__badge {
+    right: -1.5rem;
+  }
+}
+
+@keyframes book-enter {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
+@keyframes book-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(-0.7deg);
+  }
+}
+
+@keyframes book-shadow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateZ(-80px) scaleX(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(-50%) translateZ(-80px) scaleX(0.84);
+    opacity: 0.3;
+  }
+}
+
+@keyframes book-aura {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateZ(-60px) scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateZ(-60px) scale(1.06);
+  }
+}
+
+@keyframes book-badge {
+  0%,
+  100% {
+    transform: translateZ(70px) translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateZ(70px) translateY(-9px) rotate(3deg);
+  }
+}
+
+/* Respeita quem configurou o sistema para menos movimento: fica tudo parado,
+ * mas com o mesmo aspeto final. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-book__tilt,
+  .hero-book__float,
+  .hero-book__shadow,
+  .hero-book__aura,
+  .hero-book__badge {
+    animation: none;
+    transition: none;
+  }
+  .hero-book__tilt {
+    transform: none;
+  }
+}

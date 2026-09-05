@@ -3,7 +3,7 @@ import { Check, X, Gift, Star, ShieldCheck } from "lucide-react";
 import { SalesNotification } from "@/components/SalesNotification";
 
 import { Faq } from "@/components/Faq";
-import ebookCover from "@/assets/ebook-cover.jpg";
+import { HeroBook } from "@/components/HeroBook";
 import bonusLowCarb from "@/assets/bonus-lowcarb.jpg";
 import bonusAnabolica from "@/assets/bonus-anabolica.jpg";
 import bonusSaudavel from "@/assets/bonus-saudavel.jpg";
@@ -129,19 +129,7 @@ function Index() {
             abrir e seguir. Acesso imediato após a compra.
           </p>
 
-          <div className="relative mx-auto mt-10 max-w-lg">
-            <img
-              src={ebookCover}
-              alt="Capa do material 117 Exercícios de Mobilidade e Estabilidade"
-              width={1024}
-              height={1024}
-              className="w-full rounded-2xl shadow-2xl"
-            />
-            <div className="absolute -right-2 -top-4 flex size-24 flex-col items-center justify-center rounded-full bg-primary text-primary-foreground md:-right-6">
-              <span className="text-2xl font-extrabold leading-none">92%</span>
-              <span className="text-xs font-bold uppercase">OFF</span>
-            </div>
-          </div>
+          <HeroBook />
 
           <ul className="mx-auto mt-10 max-w-2xl space-y-4 text-left">
             {heroBullets.map((b) => (
