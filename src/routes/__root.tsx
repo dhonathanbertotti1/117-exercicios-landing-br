@@ -106,9 +106,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-/** ID do pixel da UTMify — trocar aqui se mudar de conta. */
-const UTMIFY_PIXEL_ID = "6a79d28aa0ad9f761f62d004";
-
 /** ID do Meta Pixel (Facebook / Instagram Ads). */
 const META_PIXEL_ID = "1749312022956542";
 
@@ -120,19 +117,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-PT">
       <head>
         <HeadContent />
-
-        {/* UTMify — pixel de conversão. O global tem de existir antes do script carregar. */}
-        <script dangerouslySetInnerHTML={{ __html: `window.pixelId = "${UTMIFY_PIXEL_ID}";` }} />
-        <script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" async defer />
-
-        {/* UTMify — captura e propagação de parâmetros UTM para o checkout. */}
-        <script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-xcod-sck=""
-          data-utmify-prevent-subids=""
-          async
-          defer
-        />
 
         {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
         <script

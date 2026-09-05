@@ -89,7 +89,6 @@ Quem tiver "reduzir movimento" ativo no sistema vê tudo estático, sem perder o
 
 Os scripts de análise estão em `src/routes/__root.tsx`, no topo do `RootShell`:
 
-- **UTMify** — pixel de conversão e propagação de parâmetros UTM para o checkout. ID em `UTMIFY_PIXEL_ID`.
 - **Meta Pixel** — conversões do Facebook e Instagram Ads. ID em `META_PIXEL_ID`. Dispara `PageView` no carregamento; inclui o `<noscript>` com o pixel em imagem.
 - **Microsoft Clarity** — mapas de calor e gravação de sessões. ID em `CLARITY_PROJECT_ID`.
 
