@@ -108,8 +108,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-/** ID do Meta Pixel (Facebook / Instagram Ads). */
-const META_PIXEL_ID = "1274196658207981";
+/**
+ * IDs dos Meta Pixels. O PageView dispara para todos.
+ *
+ * Só o primeiro tem token da API de Conversões (ver
+ * src/routes/api/meta-capi.ts); os restantes recebem apenas os eventos
+ * enviados pelo browser.
+ */
+const META_PIXEL_IDS = ["1274196658207981", "3212323472250811"];
 
 /** ID do projeto no Microsoft Clarity. */
 const CLARITY_PROJECT_ID = "ycr2wysyw2";
@@ -123,12 +129,15 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');${JSON.stringify(META_PIXEL_IDS)}.forEach(function(id){fbq('init',id);});window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
           }}
         />
         <noscript
           dangerouslySetInnerHTML={{
-            __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1" alt="" />`,
+            __html: META_PIXEL_IDS.map(
+              (id) =>
+                `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1" alt="" />`,
+            ).join(""),
           }}
         />
 

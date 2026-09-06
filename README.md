@@ -50,15 +50,15 @@ src/
 
 ## Onde mexer no conteúdo
 
-| O quê                                        | Onde                                                              |
-| -------------------------------------------- | ----------------------------------------------------------------- |
-| Textos, preços, bónus, tabela comparativa    | `src/routes/index.tsx`                                            |
+| O quê                                        | Onde                                                  |
+| -------------------------------------------- | ----------------------------------------------------- |
+| Textos, preços, bónus, tabela comparativa    | `src/routes/index.tsx`                                |
 | Links do checkout                            | `src/routes/index.tsx` (procure por `pay.kiwify.com`) |
-| Perguntas frequentes                         | `src/components/Faq.tsx`                                          |
-| Testemunhos                                  | `src/components/Testimonials.tsx`                                 |
-| Notificações de venda                        | `src/components/SalesNotification.tsx`                            |
-| Cores e tipografia                           | `src/styles.css`                                                  |
-| Título e descrição para Google/redes sociais | `src/routes/index.tsx`, bloco `head`                              |
+| Perguntas frequentes                         | `src/components/Faq.tsx`                              |
+| Testemunhos                                  | `src/components/Testimonials.tsx`                     |
+| Notificações de venda                        | `src/components/SalesNotification.tsx`                |
+| Cores e tipografia                           | `src/styles.css`                                      |
+| Título e descrição para Google/redes sociais | `src/routes/index.tsx`, bloco `head`                  |
 
 ## Identidade visual
 
@@ -89,7 +89,9 @@ Quem tiver "reduzir movimento" ativo no sistema vê tudo estático, sem perder o
 
 Os scripts de análise estão em `src/routes/__root.tsx`, no topo do `RootShell`:
 
-- **Meta Pixel** — conversões do Facebook e Instagram Ads. ID em `META_PIXEL_ID`. Dispara `PageView` no carregamento; inclui o `<noscript>` com o pixel em imagem.
+- **Meta Pixel** — conversões do Facebook e Instagram Ads. Os IDs estão em `META_PIXEL_IDS`, no `__root.tsx`: o `PageView` dispara para todos os que estiverem na lista, e o `<noscript>` inclui uma imagem por pixel.
+  - **API de Conversões** (server-side) em `src/routes/api/meta-capi.ts`. O token vive em `META_CAPI_ACCESS_TOKEN`, no `.env`, e nunca chega ao browser. O evento leva o mesmo `event_id` do pixel do browser, para o Meta deduplicar.
+  - Só o pixel em `META_PIXEL_ID` (no `.env`) recebe eventos server-side — os tokens da API de Conversões são por pixel. Os restantes ficam só com o rastreio do browser.
 - **Microsoft Clarity** — mapas de calor e gravação de sessões. ID em `CLARITY_PROJECT_ID`.
 
 Os IDs estão em constantes no topo do ficheiro — é aí que se troca de conta, não no meio do script.
