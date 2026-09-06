@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
+import { MetaCapiPageView } from "@/components/MetaCapiPageView";
+
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -107,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 /** ID do Meta Pixel (Facebook / Instagram Ads). */
-const META_PIXEL_ID = "1749312022956542";
+const META_PIXEL_ID = "1274196658207981";
 
 /** ID do projeto no Microsoft Clarity. */
 const CLARITY_PROJECT_ID = "ycr2wysyw2";
@@ -121,7 +123,7 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`,
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
           }}
         />
         <noscript
@@ -150,6 +152,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <MetaCapiPageView />
       {/* Obrigatório: as rotas filhas renderizam aqui. Remover <Outlet /> parte o site. */}
       <Outlet />
     </QueryClientProvider>

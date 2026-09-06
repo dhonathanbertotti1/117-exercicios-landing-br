@@ -188,7 +188,7 @@ function Index() {
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-4 text-center">
-          <CtaButton>Quero acessar o material</CtaButton>
+          <CtaButton>Quero aceder ao material</CtaButton>
           <GuaranteeSeal />
         </div>
       </section>
@@ -310,13 +310,13 @@ function Index() {
             <div className="grid grid-cols-3 gap-4 bg-surface px-6 py-8 md:px-8">
               <div />
               <a
-                href="https://checkout.facilerapido.site/VCCL1O8SD7IC"
+                href="https://pay.kiwify.com/k7o3mFx"
                 className="block rounded-full bg-secondary px-4 py-4 text-center text-sm font-extrabold uppercase tracking-wide text-secondary-foreground transition-transform hover:scale-[1.02] md:text-base"
               >
                 Quero o básico
               </a>
               <a
-                href="https://checkout.facilerapido.site/VCCL1O8SD7EU"
+                href="https://pay.kiwify.com/2BXlGhV"
                 className="block animate-pulse-glow rounded-full bg-primary px-4 py-4 text-center text-sm font-extrabold uppercase tracking-wide text-primary-foreground shadow-lg transition-transform hover:scale-[1.02] md:text-base"
               >
                 Quero o premium

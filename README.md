@@ -53,7 +53,7 @@ src/
 | O quê                                        | Onde                                                              |
 | -------------------------------------------- | ----------------------------------------------------------------- |
 | Textos, preços, bónus, tabela comparativa    | `src/routes/index.tsx`                                            |
-| Links do checkout                            | `src/routes/index.tsx` (procure por `checkout.facilerapido.site`) |
+| Links do checkout                            | `src/routes/index.tsx` (procure por `pay.kiwify.com`) |
 | Perguntas frequentes                         | `src/components/Faq.tsx`                                          |
 | Testemunhos                                  | `src/components/Testimonials.tsx`                                 |
 | Notificações de venda                        | `src/components/SalesNotification.tsx`                            |
