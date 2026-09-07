@@ -118,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 const META_PIXEL_IDS = ["1274196658207981", "3212323472250811"];
 
 /** ID do projeto no Microsoft Clarity. */
-const CLARITY_PROJECT_ID = "ycr2wysyw2";
+const CLARITY_PROJECT_ID = "yebhh2dk8u";
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
