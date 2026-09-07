@@ -411,3 +411,25 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Sem scroll lateral.
+ *
+ * Elementos decorativos (a aura do livro) e o pop-up de vendas, que fica
+ * estacionado fora do ecra a direita enquanto esta escondido, alargavam o
+ * documento e faziam a pagina abanar de lado no telemovel.
+ *
+ * `clip` em vez de `hidden`: nao cria um contexto de scroll, por isso nao
+ * afeta position: fixed nem sticky. O `hidden` fica de reserva para browsers
+ * sem suporte.
+ * ------------------------------------------------------------------------ */
+
+html {
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html {
+    overflow-x: clip;
+  }
+}

@@ -77,6 +77,30 @@ const bonus = [
   },
 ];
 
+const plans = [
+  {
+    key: "basic" as const,
+    name: "Plano Básico",
+    price: "19,90 €",
+    original: "47,00 €",
+    saving: "Poupa 27,10 €",
+    href: "https://pay.kiwify.com/k7o3mFx",
+    cta: "Quero o básico",
+    featured: false,
+  },
+  {
+    key: "premium" as const,
+    name: "Plano Premium",
+    price: "27,90 €",
+    original: "97,00 €",
+    saving: "Poupa 69,10 €",
+    href: "https://pay.kiwify.com/2BXlGhV",
+    cta: "Quero o premium",
+    featured: true,
+    note: "Inclui os 3 bónus — 105,00 € em extras.",
+  },
+];
+
 const comparisonFeatures = [
   { label: "117 Exercícios de Mobilidade e Estabilidade", basic: true, premium: true },
   { label: "Acesso imediato", basic: true, premium: true },
@@ -261,76 +285,71 @@ function Index() {
             Acesso imediato após a confirmação do pagamento.
           </p>
 
-          <div className="mt-14 overflow-hidden rounded-3xl border border-border bg-surface shadow-2xl">
-            <div className="grid grid-cols-3 bg-ink text-foreground">
-              <div className="px-6 py-6 text-left text-base font-bold opacity-70 md:px-8 md:text-lg">
-                O que está incluído
-              </div>
-              <div className="relative px-4 py-6 text-center md:px-8">
-                <p className="text-sm font-extrabold uppercase tracking-widest text-primary">
-                  Plano Básico
-                </p>
-                <p className="mt-2 text-3xl font-extrabold md:text-4xl">19,90 €</p>
-                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">
-                  47,00 €
-                </p>
-              </div>
-              <div className="relative px-4 pb-6 pt-10 text-center md:px-8">
-                <span className="absolute left-1/2 top-3 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[10px] font-extrabold uppercase text-primary-foreground md:text-xs">
-                  <Star className="size-3 fill-gold text-gold" /> Mais vendido
-                </span>
-                <p className="text-sm font-extrabold uppercase tracking-widest text-primary">
-                  Plano Premium
-                </p>
-                <p className="mt-2 text-3xl font-extrabold md:text-4xl">27,90 €</p>
-                <p className="mt-1 text-xs text-muted-foreground line-through md:text-sm">
-                  97,00 €
-                </p>
-              </div>
-            </div>
+          <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2 md:items-stretch">
+            {plans.map((plan, i) => (
+              <Reveal key={plan.key} delay={i * 120} className="h-full">
+                <div
+                  className={`relative flex h-full flex-col rounded-3xl bg-surface p-7 text-left text-light-foreground shadow-2xl sm:p-8 ${
+                    plan.featured
+                      ? "border-2 border-primary ring-4 ring-primary/20"
+                      : "border border-border"
+                  }`}
+                >
+                  {plan.featured && (
+                    <span className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[10px] font-extrabold uppercase tracking-wide text-primary-foreground shadow-lg">
+                      <Star className="size-3 fill-gold text-gold" /> Mais vendido
+                    </span>
+                  )}
 
-            {comparisonFeatures.map((f, i) => (
-              <div
-                key={f.label}
-                className={`grid grid-cols-3 items-center ${
-                  i % 2 === 0 ? "bg-surface" : "bg-muted/30"
-                }`}
-              >
-                <div className="px-6 py-4 text-left text-sm font-bold text-light-foreground md:px-8 md:text-base">
-                  {f.label}
+                  <p className="text-sm font-extrabold uppercase tracking-widest text-primary">
+                    {plan.name}
+                  </p>
+
+                  <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="text-5xl font-extrabold leading-none">{plan.price}</span>
+                    <span className="text-base font-bold opacity-45 line-through">
+                      {plan.original}
+                    </span>
+                  </div>
+
+                  <p className="mt-2 text-sm font-bold text-primary">{plan.saving}</p>
+
+                  <ul className="mt-7 space-y-3.5 border-t border-border pt-7">
+                    {comparisonFeatures.map((f) => {
+                      const incluido = plan.key === "premium" ? f.premium : f.basic;
+                      return (
+                        <li key={f.label} className="flex items-start gap-3 text-sm leading-snug">
+                          {incluido ? (
+                            <Check className="mt-0.5 size-5 shrink-0 text-primary" />
+                          ) : (
+                            <X className="mt-0.5 size-5 shrink-0 opacity-30" />
+                          )}
+                          <span className={incluido ? "font-medium" : "opacity-40"}>{f.label}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {/* mt-auto encosta o botao ao fundo, para os dois cartoes
+                      terminarem alinhados mesmo com listas de alturas diferentes */}
+                  <div className="mt-auto pt-8">
+                    {plan.note && (
+                      <p className="mb-4 text-center text-xs font-bold text-primary">{plan.note}</p>
+                    )}
+                    <a
+                      href={plan.href}
+                      className={`block w-full rounded-full px-5 py-4 text-center text-sm font-extrabold uppercase tracking-wide transition-transform hover:scale-[1.02] sm:text-base ${
+                        plan.featured
+                          ? "animate-pulse-glow bg-primary text-primary-foreground shadow-lg"
+                          : "bg-secondary text-secondary-foreground"
+                      }`}
+                    >
+                      {plan.cta}
+                    </a>
+                  </div>
                 </div>
-                <div className="flex justify-center px-6 py-4 md:px-8">
-                  {f.basic ? (
-                    <Check className="size-6 text-primary" />
-                  ) : (
-                    <X className="size-6 text-destructive" />
-                  )}
-                </div>
-                <div className="flex justify-center px-6 py-4 md:px-8">
-                  {f.premium ? (
-                    <Check className="size-6 text-primary" />
-                  ) : (
-                    <X className="size-6 text-destructive" />
-                  )}
-                </div>
-              </div>
+              </Reveal>
             ))}
-
-            <div className="grid grid-cols-3 gap-4 bg-surface px-6 py-8 md:px-8">
-              <div />
-              <a
-                href="https://pay.kiwify.com/k7o3mFx"
-                className="block rounded-full bg-secondary px-4 py-4 text-center text-sm font-extrabold uppercase tracking-wide text-secondary-foreground transition-transform hover:scale-[1.02] md:text-base"
-              >
-                Quero o básico
-              </a>
-              <a
-                href="https://pay.kiwify.com/2BXlGhV"
-                className="block animate-pulse-glow rounded-full bg-primary px-4 py-4 text-center text-sm font-extrabold uppercase tracking-wide text-primary-foreground shadow-lg transition-transform hover:scale-[1.02] md:text-base"
-              >
-                Quero o premium
-              </a>
-            </div>
           </div>
 
           <p className="mx-auto mt-10 max-w-2xl text-xl font-bold text-primary">
