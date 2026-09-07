@@ -129,7 +129,7 @@ function RootShell({ children }: { children: ReactNode }) {
         {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');${JSON.stringify(META_PIXEL_IDS)}.forEach(function(id){fbq('init',id);});window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');${META_PIXEL_IDS.map((id) => `fbq('init','${id}');`).join("")}window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
           }}
         />
         <noscript
