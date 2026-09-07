@@ -89,6 +89,7 @@ Quem tiver "reduzir movimento" ativo no sistema vê tudo estático, sem perder o
 
 Os scripts de análise estão em `src/routes/__root.tsx`, no topo do `RootShell`:
 
+- **UTMify** — pixel de conversão (ID em `UTMIFY_PIXEL_ID`) e propagação dos parâmetros de campanha (`utm_*`, `fbclid`) para os links do checkout, para a Kiwify saber de que anúncio veio a venda.
 - **Meta Pixel** — conversões do Facebook e Instagram Ads. Os IDs estão em `META_PIXEL_IDS`, no `__root.tsx`: o `PageView` dispara para todos os que estiverem na lista, e o `<noscript>` inclui uma imagem por pixel.
   - **API de Conversões** (server-side) em `src/routes/api/meta-capi.ts`. O evento leva o mesmo `event_id` do pixel do browser, para o Meta deduplicar.
   - Os tokens vivem no `.env`, em pares numerados `META_CAPI_PIXEL_n` / `META_CAPI_TOKEN_n` — cada token do Meta só serve o seu próprio pixel. Ver [`.env.example`](.env.example). Nunca chegam ao browser.

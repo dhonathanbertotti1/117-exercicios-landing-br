@@ -108,6 +108,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+/** ID do pixel da UTMify. */
+const UTMIFY_PIXEL_ID = "6a9e20885a44b5a82cb4ee62";
+
 /**
  * IDs dos Meta Pixels. O PageView dispara para todos.
  *
@@ -125,6 +128,23 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-PT">
       <head>
         <HeadContent />
+
+        {/* UTMify — pixel de conversao. O global tem de existir antes do
+            script carregar. */}
+        <script dangerouslySetInnerHTML={{ __html: `window.pixelId = "${UTMIFY_PIXEL_ID}";` }} />
+        <script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" async defer />
+
+        {/* UTMify — captura os parametros da campanha (utm_*, fbclid) e
+            propaga-os para os links do checkout, para a Kiwify saber de que
+            anuncio veio a venda. Sem isto o Purchase chega ao Meta sem
+            atribuicao. */}
+        <script
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          data-utmify-prevent-xcod-sck=""
+          data-utmify-prevent-subids=""
+          async
+          defer
+        />
 
         {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
         <script
