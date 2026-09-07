@@ -4,6 +4,9 @@ import { SalesNotification } from "@/components/SalesNotification";
 
 import { Faq } from "@/components/Faq";
 import { HeroBook } from "@/components/HeroBook";
+import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
+import { StickyCta } from "@/components/StickyCta";
 import bonusLowCarb from "@/assets/bonus-lowcarb.jpg";
 import bonusAnabolica from "@/assets/bonus-anabolica.jpg";
 import bonusSaudavel from "@/assets/bonus-saudavel.jpg";
@@ -117,6 +120,7 @@ function Index() {
   return (
     <main className="font-sans">
       <SalesNotification />
+      <StickyCta />
       {/* HERO */}
       <section className="bg-background px-6 py-16 md:py-24">
         <div className="mx-auto max-w-4xl text-center">
@@ -132,11 +136,13 @@ function Index() {
           <HeroBook />
 
           <ul className="mx-auto mt-10 max-w-2xl space-y-4 text-left">
-            {heroBullets.map((b) => (
-              <li key={b} className="flex items-start gap-3 text-foreground">
-                <Check className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span>{b}</span>
-              </li>
+            {heroBullets.map((b, i) => (
+              <Reveal key={b} delay={i * 90}>
+                <li className="flex items-start gap-3 text-foreground">
+                  <Check className="mt-0.5 size-5 shrink-0 text-primary" />
+                  <span>{b}</span>
+                </li>
+              </Reveal>
             ))}
           </ul>
 
@@ -150,7 +156,9 @@ function Index() {
       {/* O QUE VAI ENCONTRAR */}
       <section className="bg-light px-6 py-20 text-light-foreground">
         <div className="mx-auto max-w-4xl text-center">
-          <Pill>117 exercícios de mobilidade e estabilidade</Pill>
+          <Pill>
+            <CountUp to={117} /> exercícios de mobilidade e estabilidade
+          </Pill>
           <h2 className="mt-8 text-3xl font-extrabold leading-tight md:text-5xl">
             Mais mobilidade e estabilidade para treinar sem depender de rotinas improvisadas.
           </h2>
@@ -177,14 +185,13 @@ function Index() {
       {/* CATEGORIAS */}
       <section className="bg-background px-6 pb-20 pt-16">
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-          {categorias.map((c) => (
-            <div
-              key={c.title}
-              className="rounded-2xl bg-light px-8 py-8 text-center text-light-foreground shadow-lg"
-            >
-              <h3 className="text-xl font-extrabold">{c.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed opacity-80">{c.text}</p>
-            </div>
+          {categorias.map((c, i) => (
+            <Reveal key={c.title} delay={i * 120}>
+              <div className="h-full rounded-2xl bg-light px-8 py-8 text-center text-light-foreground shadow-lg transition-transform duration-300 hover:-translate-y-1.5">
+                <h3 className="text-xl font-extrabold">{c.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed opacity-80">{c.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-4 text-center">
@@ -207,31 +214,33 @@ function Index() {
           </p>
 
           <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {bonus.map((b) => (
-              <article key={b.title} className="overflow-hidden rounded-2xl bg-surface shadow-lg">
-                <div className="relative">
-                  <img
-                    src={b.img}
-                    alt={b.title}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    className="h-56 w-full object-cover"
-                  />
-                  <span className="absolute left-4 top-4 rounded-md bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
-                    {b.tag}
-                  </span>
-                </div>
-                <div className="px-6 py-8">
-                  <div className="flex items-center justify-center gap-2">
-                    <h3 className="text-xl font-extrabold">{b.title}</h3>
+            {bonus.map((b, i) => (
+              <Reveal key={b.title} delay={i * 120} className="h-full">
+                <article className="h-full overflow-hidden rounded-2xl bg-surface shadow-lg transition-transform duration-300 hover:-translate-y-1.5">
+                  <div className="relative">
+                    <img
+                      src={b.img}
+                      alt={b.title}
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      className="h-56 w-full object-cover"
+                    />
+                    <span className="absolute left-4 top-4 rounded-md bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+                      {b.tag}
+                    </span>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground line-through">
-                    Valor: {b.originalPrice}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed opacity-75">{b.text}</p>
-                </div>
-              </article>
+                  <div className="px-6 py-8">
+                    <div className="flex items-center justify-center gap-2">
+                      <h3 className="text-xl font-extrabold">{b.title}</h3>
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground line-through">
+                      Valor: {b.originalPrice}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed opacity-75">{b.text}</p>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
 

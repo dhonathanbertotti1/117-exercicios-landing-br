@@ -129,6 +129,12 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
 
+        {/* Antes de o body pintar: marca que ha JS, para o CSS de revelacao
+            so esconder conteudo quando ele pode mesmo voltar a aparecer. */}
+        <script
+          dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add("js");` }}
+        />
+
         {/* UTMify — pixel de conversao. O global tem de existir antes do
             script carregar. */}
         <script dangerouslySetInnerHTML={{ __html: `window.pixelId = "${UTMIFY_PIXEL_ID}";` }} />
