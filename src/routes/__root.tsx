@@ -111,9 +111,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 /**
  * IDs dos Meta Pixels. O PageView dispara para todos.
  *
- * Só o primeiro tem token da API de Conversões (ver
- * src/routes/api/meta-capi.ts); os restantes recebem apenas os eventos
- * enviados pelo browser.
+ * Esta lista faz o rastreio no browser. O envio pelo servidor e configurado
+ * a parte, em pares pixel+token no .env (ver src/routes/api/meta-capi.ts),
+ * porque cada token do Meta so serve o seu proprio pixel.
  */
 const META_PIXEL_IDS = ["1274196658207981", "3212323472250811"];
 
