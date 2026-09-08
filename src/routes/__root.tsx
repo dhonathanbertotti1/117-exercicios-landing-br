@@ -118,7 +118,7 @@ const UTMIFY_PIXEL_ID = "6a9e20885a44b5a82cb4ee62";
  * a parte, em pares pixel+token no .env (ver src/routes/api/meta-capi.ts),
  * porque cada token do Meta so serve o seu proprio pixel.
  */
-const META_PIXEL_IDS = ["1274196658207981", "3212323472250811"];
+const META_PIXEL_IDS = ["1274196658207981", "3212323472250811", "1540545657559371"];
 
 /** ID do projeto no Microsoft Clarity. */
 const CLARITY_PROJECT_ID = "yebhh2dk8u";
