@@ -20,7 +20,7 @@ function NotFoundComponent() {
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Página não encontrada</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          A página que procura não existe ou foi movida.
+          A página que você procura não existe ou foi movida.
         </p>
         <div className="mt-6">
           <Link
@@ -46,7 +46,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           Esta página não carregou
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Algo correu mal do nosso lado. Tente atualizar ou voltar ao início.
+          Algo deu errado do nosso lado. Tente atualizar ou voltar ao início.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -125,7 +125,7 @@ const CLARITY_PROJECT_ID = "yebhh2dk8u";
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-PT">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
 

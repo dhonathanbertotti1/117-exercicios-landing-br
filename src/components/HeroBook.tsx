@@ -22,7 +22,7 @@ export function HeroBook() {
     const tilt = tiltRef.current;
     if (!stage || !tilt) return;
 
-    // Sem inclinação em ecrãs táteis (não há cursor a seguir) nem para quem
+    // Sem inclinação em telas de toque (não há cursor a seguir) nem para quem
     // configurou o sistema para menos movimento.
     const coarse = window.matchMedia("(pointer: coarse)");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");

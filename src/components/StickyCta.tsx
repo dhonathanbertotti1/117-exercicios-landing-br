@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 /**
- * Barra de compra fixa no fundo, em telemovel.
+ * Barra de compra fixa no rodape, no celular.
  *
- * A pagina e longa: sem isto, quem esta a meio tem de rolar ate aos planos
+ * A pagina e longa: sem isto, quem esta no meio tem de rolar ate os planos
  * para comprar. Aparece so depois do hero sair de vista, para nao tapar a
- * primeira impressao, e desaparece quando a seccao de planos esta no ecra,
+ * primeira impressao, e desaparece quando a secao de planos esta na tela,
  * onde ja ha botoes.
  */
 export function StickyCta() {
@@ -37,14 +37,14 @@ export function StickyCta() {
         <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
           A partir de
         </p>
-        <p className="text-xl font-extrabold leading-none text-foreground">19,90 €</p>
+        <p className="text-xl font-extrabold leading-none text-foreground">R$ 19,10</p>
       </div>
       <a
         href="#planos"
         className="rounded-full bg-primary px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-primary-foreground"
         tabIndex={visible ? 0 : -1}
       >
-        Quero aceder
+        Quero acessar
       </a>
     </div>
   );

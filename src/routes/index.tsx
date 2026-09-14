@@ -18,13 +18,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Recupere a mobilidade do seu corpo em poucas semanas. Guia em PDF com 117 exercícios, séries, repetições e intervalos prontos a usar. Acesso imediato.",
+          "Recupere a mobilidade do seu corpo em poucas semanas. Guia em PDF com 117 exercícios, séries, repetições e intervalos prontos para usar. Acesso imediato.",
       },
       { property: "og:title", content: "117 Exercícios de Mobilidade e Estabilidade" },
       {
         property: "og:description",
         content:
-          "Recupere a mobilidade do seu corpo em poucas semanas. 117 exercícios prontos a usar, sem equipamento e sem ginásio.",
+          "Recupere a mobilidade do seu corpo em poucas semanas. 117 exercícios prontos para usar, sem equipamento e sem academia.",
       },
     ],
   }),
@@ -32,8 +32,8 @@ export const Route = createFileRoute("/")({
 });
 
 const heroBullets = [
-  "117 exercícios prontos a usar para variar os seus treinos sem repetir o mesmo movimento durante meses",
-  "Organizado por categoria — sabe exatamente o que treinar hoje",
+  "117 exercícios prontos para usar para variar os seus treinos sem repetir o mesmo movimento durante meses",
+  "Organizado por categoria — você sabe exatamente o que treinar hoje",
   "3 fases de evolução: da mobilidade básica ao desempenho",
   "Séries, repetições e descanso já calculados — excelente para iniciantes",
 ];
@@ -41,11 +41,11 @@ const heroBullets = [
 const categorias = [
   {
     title: "Mobilidade Articular",
-    text: "Deixe de sentir as articulações bloqueadas. Devolva amplitude de movimento ao ombro, anca e coluna com controlo — para se mover sem dores no dia a dia e no treino.",
+    text: "Pare de sentir as articulações travadas. Devolva amplitude de movimento ao ombro, quadril e coluna com controle — para se mover sem dores no dia a dia e no treino.",
   },
   {
-    title: "Estabilidade e Controlo",
-    text: "Mobilidade sem estabilidade dá lesão. Desenvolva o controlo motor que sustenta cada movimento, melhorando o equilíbrio e a postura.",
+    title: "Estabilidade e Controle",
+    text: "Mobilidade sem estabilidade dá lesão. Desenvolva o controle motor que sustenta cada movimento, melhorando o equilíbrio e a postura.",
   },
   {
     title: "Mobilidade e Desempenho",
@@ -55,25 +55,25 @@ const categorias = [
 
 const bonus = [
   {
-    tag: "Bónus #1",
+    tag: "Bônus #1",
     img: bonusLowCarb,
     title: "Plano de Emagrecimento e Definição",
     text: "Um plano completo para acelerar a queima de gordura e definir o corpo, com orientações práticas de treino e alimentação.",
-    originalPrice: "25,00 €",
+    originalPrice: "R$ 25,00",
   },
   {
-    tag: "Bónus #2",
+    tag: "Bônus #2",
     img: bonusAnabolica,
     title: "Guia de Treino para CORE",
     text: "Fortaleça o centro do seu corpo com treinos focados no CORE, melhorando a postura, o equilíbrio e o desempenho nos exercícios.",
-    originalPrice: "35,00 €",
+    originalPrice: "R$ 35,00",
   },
   {
-    tag: "Bónus #3",
+    tag: "Bônus #3",
     img: bonusSaudavel,
     title: "40 Planos de Treino Pesado",
-    text: "40 planos de treino pesado prontos a usar para variar os seus treinos e continuar a evoluir em força e hipertrofia.",
-    originalPrice: "45,00 €",
+    text: "40 planos de treino pesado prontos para usar para variar os seus treinos e continuar evoluindo em força e hipertrofia.",
+    originalPrice: "R$ 45,00",
   },
 ];
 
@@ -81,9 +81,9 @@ const plans = [
   {
     key: "basic" as const,
     name: "Plano Básico",
-    price: "19,90 €",
-    original: "47,00 €",
-    saving: "Poupa 27,10 €",
+    price: "R$ 19,10",
+    original: "R$ 47,00",
+    saving: "Economize R$ 27,90",
     href: "https://pay.kiwify.com/k7o3mFx",
     cta: "Quero o básico",
     featured: false,
@@ -91,13 +91,13 @@ const plans = [
   {
     key: "premium" as const,
     name: "Plano Premium",
-    price: "27,90 €",
-    original: "97,00 €",
-    saving: "Poupa 69,10 €",
+    price: "R$ 27,90",
+    original: "R$ 97,00",
+    saving: "Economize R$ 69,10",
     href: "https://pay.kiwify.com/2BXlGhV",
     cta: "Quero o premium",
     featured: true,
-    note: "Inclui os 3 bónus — 105,00 € em extras.",
+    note: "Inclui os 3 bônus — R$ 105,00 em extras.",
   },
 ];
 
@@ -150,7 +150,7 @@ function Index() {
         <div className="mx-auto max-w-4xl text-center">
           <Pill>Oferta especial - 92% de desconto</Pill>
           <h1 className="mt-6 text-4xl font-extrabold leading-tight text-foreground md:text-6xl">
-            Recupere a mobilidade do seu corpo em poucas semanas — sem equipamento, sem ginásio
+            Recupere a mobilidade do seu corpo em poucas semanas — sem equipamento, sem academia
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg font-bold text-primary md:text-xl">
             Um guia em PDF com 117 exercícios, séries, repetições e intervalos já definidos. É só
@@ -171,13 +171,13 @@ function Index() {
           </ul>
 
           <div className="mt-10 flex flex-col items-center gap-4">
-            <CtaButton>Quero aceder ao material</CtaButton>
+            <CtaButton>Quero acessar o material</CtaButton>
             <GuaranteeSeal />
           </div>
         </div>
       </section>
 
-      {/* O QUE VAI ENCONTRAR */}
+      {/* O QUE VOCÊ VAI ENCONTRAR */}
       <section className="bg-light px-6 py-20 text-light-foreground">
         <div className="mx-auto max-w-4xl text-center">
           <Pill>
@@ -194,7 +194,7 @@ function Index() {
 
         <div className="mx-auto mt-14 max-w-4xl rounded-3xl bg-ink px-6 py-12 text-center text-foreground">
           <h3 className="text-2xl font-extrabold md:text-3xl">
-            O que vai encontrar neste material
+            O que você vai encontrar neste material
           </h3>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Material disponibilizado em PDF com exercícios independentes, sem repetição, organizados
@@ -219,22 +219,22 @@ function Index() {
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-4 text-center">
-          <CtaButton>Quero aceder ao material</CtaButton>
+          <CtaButton>Quero acessar o material</CtaButton>
           <GuaranteeSeal />
         </div>
       </section>
 
-      {/* BÓNUS */}
+      {/* BÔNUS */}
       <section className="bg-light px-6 py-20 text-light-foreground">
         <div className="mx-auto max-w-6xl text-center">
           <Pill>
-            <Gift className="size-4" /> Bónus exclusivos
+            <Gift className="size-4" /> Bônus exclusivos
           </Pill>
           <h2 className="mt-6 text-3xl font-extrabold md:text-5xl">
-            +3 Bónus Exclusivos Para Quem Adquirir Hoje
+            +3 Bônus Exclusivos Para Quem Adquirir Hoje
           </h2>
           <p className="mt-4 text-lg opacity-70">
-            Além do material principal, recebe acesso imediato a estes bónus incríveis.
+            Além do material principal, você recebe acesso imediato a estes bônus incríveis.
           </p>
 
           <div className="mt-14 grid gap-8 md:grid-cols-3">
@@ -270,7 +270,7 @@ function Index() {
 
           <div className="mx-auto mt-10 max-w-2xl rounded-2xl bg-primary px-6 py-4 text-primary-foreground">
             <p className="text-lg font-extrabold">
-              Total em bónus: 105,00 € — incluído gratuitamente no Plano Premium.
+              Total em bônus: R$ 105,00 — incluído gratuitamente no Plano Premium.
             </p>
           </div>
         </div>
@@ -353,7 +353,7 @@ function Index() {
           </div>
 
           <p className="mx-auto mt-10 max-w-2xl text-xl font-bold text-primary">
-            Por apenas mais 8,00 €, leva os 3 bónus completos. A maioria escolhe o Premium.
+            Por apenas mais R$ 8,80, você leva os 3 bônus completos. A maioria escolhe o Premium.
           </p>
         </div>
       </section>
