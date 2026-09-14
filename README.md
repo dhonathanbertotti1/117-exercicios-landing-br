@@ -39,7 +39,7 @@ O site fica em `http://localhost:5173`. Não são necessárias variáveis de amb
 ```
 src/
   routes/
-    __root.tsx   Shell HTML, scripts de tracking, páginas 404 e de erro
+    __root.tsx   Shell HTML, páginas 404 e de erro
     index.tsx    A landing page inteira
   components/    Faq, Testimonials, SalesNotification
   components/ui/ Componentes base shadcn/ui
@@ -84,19 +84,6 @@ O livro no hero é a fotografia `src/assets/ebook-cover-3d.jpg` tratada como obj
 A fotografia tem o fundo quase preto: o `mix-blend-mode: screen` funde-o com o fundo da secção e as máscaras em gradiente esbatem as quatro arestas, para não se ver o retângulo do enquadramento. O ficheiro `ebook-cover.jpg` é o original sem recorte, mantido como fonte.
 
 Quem tiver "reduzir movimento" ativo no sistema vê tudo estático, sem perder o aspeto final. Em ecrãs táteis não há inclinação.
-
-## Tracking
-
-Os scripts de análise estão em `src/routes/__root.tsx`, no topo do `RootShell`:
-
-- **UTMify** — pixel de conversão (ID em `UTMIFY_PIXEL_ID`) e propagação dos parâmetros de campanha (`utm_*`, `fbclid`) para os links do checkout, para a Kiwify saber de que anúncio veio a venda.
-- **Meta Pixel** — conversões do Facebook e Instagram Ads. Os IDs estão em `META_PIXEL_IDS`, no `__root.tsx`: o `PageView` dispara para todos os que estiverem na lista, e o `<noscript>` inclui uma imagem por pixel.
-  - **API de Conversões** (server-side) em `src/routes/api/meta-capi.ts`. O evento leva o mesmo `event_id` do pixel do browser, para o Meta deduplicar.
-  - Os tokens vivem no `.env`, em pares numerados `META_CAPI_PIXEL_n` / `META_CAPI_TOKEN_n` — cada token do Meta só serve o seu próprio pixel. Ver [`.env.example`](.env.example). Nunca chegam ao browser.
-  - Um pixel em baixo não impede os outros de receber o evento; sem tokens configurados o site funciona na mesma, apenas sem CAPI.
-- **Microsoft Clarity** — mapas de calor e gravação de sessões. ID em `CLARITY_PROJECT_ID`.
-
-Os IDs estão em constantes no topo do ficheiro — é aí que se troca de conta, não no meio do script.
 
 ## Deploy
 

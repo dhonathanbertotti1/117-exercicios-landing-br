@@ -9,8 +9,6 @@ import {
 } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
-import { MetaCapiPageView } from "@/components/MetaCapiPageView";
-
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -108,21 +106,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-/** ID do pixel da UTMify. */
-const UTMIFY_PIXEL_ID = "6a9e20885a44b5a82cb4ee62";
-
-/**
- * IDs dos Meta Pixels. O PageView dispara para todos.
- *
- * Esta lista faz o rastreio no browser. O envio pelo servidor e configurado
- * a parte, em pares pixel+token no .env (ver src/routes/api/meta-capi.ts),
- * porque cada token do Meta so serve o seu proprio pixel.
- */
-const META_PIXEL_IDS = ["1274196658207981", "3212323472250811", "1540545657559371"];
-
-/** ID do projeto no Microsoft Clarity. */
-const CLARITY_PROJECT_ID = "yebhh2dk8u";
-
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
@@ -133,45 +116,6 @@ function RootShell({ children }: { children: ReactNode }) {
             so esconder conteudo quando ele pode mesmo voltar a aparecer. */}
         <script
           dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add("js");` }}
-        />
-
-        {/* UTMify — pixel de conversao. O global tem de existir antes do
-            script carregar. */}
-        <script dangerouslySetInnerHTML={{ __html: `window.pixelId = "${UTMIFY_PIXEL_ID}";` }} />
-        <script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" async defer />
-
-        {/* UTMify — captura os parametros da campanha (utm_*, fbclid) e
-            propaga-os para os links do checkout, para a Kiwify saber de que
-            anuncio veio a venda. Sem isto o Purchase chega ao Meta sem
-            atribuicao. */}
-        <script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-xcod-sck=""
-          data-utmify-prevent-subids=""
-          async
-          defer
-        />
-
-        {/* Meta Pixel — conversoes do Facebook e Instagram Ads. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');${META_PIXEL_IDS.map((id) => `fbq('init','${id}');`).join("")}window.__metaPageViewId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();fbq('track','PageView',{},{eventID:window.__metaPageViewId});`,
-          }}
-        />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: META_PIXEL_IDS.map(
-              (id) =>
-                `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1" alt="" />`,
-            ).join(""),
-          }}
-        />
-
-        {/* Microsoft Clarity — mapas de calor e gravação de sessões. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");`,
-          }}
         />
       </head>
       <body>
@@ -187,7 +131,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MetaCapiPageView />
       {/* Obrigatório: as rotas filhas renderizam aqui. Remover <Outlet /> parte o site. */}
       <Outlet />
     </QueryClientProvider>
