@@ -33,15 +33,18 @@ export function StickyCta() {
 
   return (
     <div className={`sticky-cta ${visible ? "is-visible" : ""}`} aria-hidden={!visible}>
-      <div>
-        <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          A partir de
+      <div className="min-w-0">
+        <p className="eyebrow text-[9px] font-bold text-primary">Plano Premium</p>
+        <p className="mt-0.5 flex items-baseline gap-2">
+          <span className="font-display text-xl font-extrabold leading-none text-foreground">
+            R$ 27,90
+          </span>
+          <span className="text-xs font-semibold text-muted-foreground line-through">R$ 97,00</span>
         </p>
-        <p className="text-xl font-extrabold leading-none text-foreground">R$ 19,10</p>
       </div>
       <a
         href="#planos"
-        className="rounded-full bg-primary px-6 py-3 text-sm font-extrabold uppercase tracking-wide text-primary-foreground"
+        className="cta-shine shrink-0 rounded-full bg-primary px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.08em] text-primary-foreground"
         tabIndex={visible ? 0 : -1}
       >
         Quero acessar

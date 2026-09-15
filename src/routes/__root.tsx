@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Manrope:wght@400;500;600;700;800&display=swap",
       },
       // SVG primeiro: os browsers modernos preferem-no e fica nitido em qualquer ecra.
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },

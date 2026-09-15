@@ -40,36 +40,45 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="bg-light px-6 py-20 text-light-foreground" aria-labelledby="faq-titulo">
+    <section className="px-6 py-20 md:py-28" aria-labelledby="faq-titulo">
       <div className="mx-auto max-w-3xl">
-        <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-[10px] font-bold text-primary">
             Dúvidas
           </span>
-          <h2 id="faq-titulo" className="mt-6 text-3xl font-extrabold md:text-4xl">
+          <h2
+            id="faq-titulo"
+            className="font-display mt-6 text-3xl font-extrabold leading-[1.08] text-foreground md:text-[2.75rem]"
+          >
             Perguntas frequentes
           </h2>
-          <p className="mt-3 opacity-70">Tudo o que você precisa saber antes de começar.</p>
+          <p className="mt-5 text-base text-muted-foreground">
+            Tudo o que você precisa saber antes de começar.
+          </p>
         </div>
 
-        <div className="mt-10 space-y-3">
+        <div className="mt-14 divide-y divide-hairline border-y border-hairline">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={f.q} className="overflow-hidden rounded-xl bg-surface shadow-sm">
+              <div key={f.q}>
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
                   aria-controls={`faq-resposta-${i}`}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  className="flex w-full items-center justify-between gap-5 py-5 text-left transition-colors hover:text-primary"
                 >
-                  <span className="font-extrabold">{f.q}</span>
-                  <ChevronDown
-                    className={`size-5 shrink-0 text-primary transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
+                  <span className="text-sm font-bold text-foreground md:text-base">{f.q}</span>
+                  <span
+                    className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                      isOpen
+                        ? "rotate-180 border-primary bg-primary text-primary-foreground"
+                        : "border-hairline text-primary"
                     }`}
-                  />
+                  >
+                    <ChevronDown className="size-4" />
+                  </span>
                 </button>
                 <div
                   id={`faq-resposta-${i}`}
@@ -78,7 +87,9 @@ export function Faq() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-5 text-sm leading-relaxed opacity-75">{f.a}</p>
+                    <p className="max-w-2xl pb-6 pr-10 text-sm leading-relaxed text-muted-foreground">
+                      {f.a}
+                    </p>
                   </div>
                 </div>
               </div>

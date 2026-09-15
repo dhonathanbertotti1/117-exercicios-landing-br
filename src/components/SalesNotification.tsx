@@ -135,16 +135,18 @@ export function SalesNotification() {
 
   return (
     <div
-      className={`fixed top-4 right-4 z-50 max-w-xs transition-all duration-[700ms] ease-in-out ${translateClass} ${opacityClass}`}
+      // No telemovel fica em baixo, acima da barra de compra: em cima tapava o
+      // titulo do hero logo na primeira impressao. No desktop sobe ao canto.
+      className={`fixed bottom-24 left-4 right-4 z-50 transition-all duration-[700ms] ease-in-out sm:bottom-auto sm:left-auto sm:right-4 sm:top-4 sm:max-w-xs ${translateClass} ${opacityClass}`}
       aria-live="polite"
       aria-atomic="true"
     >
-      <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4 shadow-2xl">
+      <div className="flex items-start gap-3 rounded-2xl border border-hairline bg-elev-1/95 p-4 shadow-2xl backdrop-blur-md">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
           <ShoppingCart className="size-5 text-primary" />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-bold text-card-foreground">
+          <p className="text-sm font-bold text-foreground">
             <span className="text-primary">{notification.name}</span> acabou de comprar
           </p>
           <p className="mt-0.5 text-xs font-extrabold text-primary">{notification.packageName}</p>

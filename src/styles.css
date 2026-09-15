@@ -64,12 +64,17 @@
   --color-light-foreground: var(--light-foreground);
   --color-gold: var(--gold);
   --color-surface: var(--surface);
+  --color-elev-1: var(--elev-1);
+  --color-elev-2: var(--elev-2);
+  --color-hairline: var(--hairline);
   --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 :root {
   --radius: 0.75rem;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", "Manrope", ui-sans-serif, system-ui, sans-serif;
   --background: oklch(0.18 0.035 259);
   --foreground: oklch(0.98 0.005 250);
   --card: oklch(0.22 0.04 259);
@@ -94,6 +99,11 @@
   --surface: oklch(1 0 0);
   --light-foreground: oklch(0.19 0.04 259);
   --gold: oklch(0.85 0.15 88);
+  /* Superficies elevadas: a pagina e toda escura, a separacao vem da
+   * elevacao e do brilho, nao de trocar o fundo para claro. */
+  --elev-1: oklch(0.225 0.038 259);
+  --elev-2: oklch(0.265 0.042 259);
+  --hairline: oklch(1 0 0 / 0.09);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -431,5 +441,151 @@ html {
 @supports (overflow: clip) {
   html {
     overflow-x: clip;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Sistema visual da pagina de vendas
+ *
+ * A pagina e toda escura de ponta a ponta. A separacao entre seccoes vem de
+ * elevacao, brilho e filetes — nao de alternar faixas claras e escuras, que e
+ * o que fazia a pagina parecer um template.
+ * ------------------------------------------------------------------------ */
+
+/* Titulos: Archivo em largura expandida. Da o ar atletico/editorial sem
+ * recorrer a maiusculas condensadas de ginasio. */
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.022em;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 105;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Numero gigante e vazado dos cartoes de fase. Fica atras do conteudo, como
+ * marca de agua, por isso nao precisa de contraste de leitura. */
+.ghost-numeral {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 125;
+  font-weight: 900;
+  line-height: 0.78;
+  -webkit-text-stroke: 1.5px oklch(0.68 0.126 179 / 0.28);
+  color: transparent;
+  user-select: none;
+}
+
+/* Grao fino por cima de tudo: tira o aspeto de gradiente digital chapado.
+ * pointer-events none para nao interferir com cliques. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Halo teal atras de uma seccao. O elemento e decorativo e fica sempre
+ * contido pelo overflow-clip do html, por isso nao alarga a pagina. */
+.section-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: var(--glow-top, -10%);
+  height: var(--glow-size, 620px);
+  /* Nunca mais largo do que a seccao: centrado em left:50%, um circulo maior
+   * do que o ecra vaza para os dois lados e o telemovel passa a rolar de
+   * lado. O min() trava isso sem precisar de clipar a seccao. */
+  width: min(var(--glow-size, 620px), 100%);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    oklch(0.68 0.126 179 / 0.16) 0%,
+    oklch(0.68 0.126 179 / 0.05) 45%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Filete de separacao que desvanece nas pontas — substitui a mudanca de cor
+ * de fundo entre seccoes. */
+.rule-fade {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-hairline) 18%,
+    var(--color-hairline) 82%,
+    transparent
+  );
+}
+
+/* Cartao de plano em destaque: borda viva em gradiente, feita com duas
+ * camadas de background e mask, para nao depender de uma borda solida. */
+.plan-featured {
+  position: relative;
+  background:
+    linear-gradient(var(--color-elev-1), var(--color-elev-1)) padding-box,
+    linear-gradient(
+        145deg,
+        oklch(0.68 0.126 179),
+        oklch(0.68 0.126 179 / 0.25) 55%,
+        oklch(0.85 0.15 88 / 0.5)
+      )
+      border-box;
+  border: 1.5px solid transparent;
+  box-shadow:
+    0 0 0 1px oklch(0.68 0.126 179 / 0.1),
+    0 30px 70px -20px oklch(0 0 0 / 0.75),
+    0 0 90px -40px oklch(0.68 0.126 179 / 0.7);
+}
+
+/* Brilho que atravessa o botao principal de tempos a tempos. Chama o olho
+ * para o CTA sem o fazer piscar como um banner. */
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 35%, oklch(1 0 0 / 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: cta-shine 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cta-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  85%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-shine::after {
+    animation: none;
+    opacity: 0;
   }
 }

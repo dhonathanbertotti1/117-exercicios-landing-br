@@ -82,27 +82,32 @@ function Stars({ count }: { count: number }) {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <article className="flex h-full flex-col rounded-2xl bg-card p-6 shadow-lg">
-      <div className="flex items-center gap-4">
+    <article className="relative flex h-full flex-col rounded-2xl border border-hairline bg-elev-1 p-6 transition-colors duration-300 hover:border-primary/30">
+      {/* Aspa decorativa: marca o bloco como citacao sem gastar uma linha de texto. */}
+      <span
+        aria-hidden="true"
+        className="font-display pointer-events-none absolute right-5 top-2 select-none text-6xl font-extrabold leading-none text-primary/12"
+      >
+        &rdquo;
+      </span>
+      <Stars count={t.stars} />
+      <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground/85">{t.text}</p>
+      <div className="mt-6 flex items-center gap-3.5 border-t border-hairline pt-5">
         <img
           src={t.img}
           alt={`Foto de ${t.name}`}
           width={512}
           height={512}
           loading="lazy"
-          className="size-14 shrink-0 rounded-full object-cover ring-2 ring-primary/40"
+          className="size-11 shrink-0 rounded-full object-cover ring-2 ring-primary/30"
         />
         <div className="min-w-0">
-          <p className="truncate font-extrabold text-card-foreground">{t.name}</p>
-          <p className="text-xs text-muted-foreground">
+          <p className="truncate text-sm font-extrabold text-foreground">{t.name}</p>
+          <p className="truncate text-xs text-muted-foreground">
             {t.role} • {t.city}
           </p>
         </div>
       </div>
-      <div className="mt-4">
-        <Stars count={t.stars} />
-      </div>
-      <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">“{t.text}”</p>
     </article>
   );
 }
@@ -129,32 +134,33 @@ export function Testimonials() {
   };
 
   return (
-    <section className="bg-background px-6 py-20" aria-labelledby="depoimentos-titulo">
+    <section className="px-6 py-20 md:py-28" aria-labelledby="depoimentos-titulo">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-primary-foreground">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-[10px] font-bold text-primary">
             Depoimentos
           </span>
           <h2
             id="depoimentos-titulo"
-            className="mt-6 text-3xl font-extrabold text-foreground md:text-4xl"
+            className="font-display mt-6 text-3xl font-extrabold leading-[1.08] text-foreground md:text-[2.75rem]"
           >
-            O que dizem os nossos clientes
+            Quem já está se movendo <span className="text-primary">melhor</span>
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            Experiências reais de pessoas que escolheram a nossa solução.
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+            Experiências de pessoas que passaram a treinar mobilidade com um plano, em vez de
+            improvisar.
           </p>
         </div>
 
         {/* Desktop: grid */}
-        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
             <TestimonialCard key={t.name} t={t} />
           ))}
         </div>
 
         {/* Mobile: carrossel */}
-        <div className="mt-10 md:hidden">
+        <div className="mt-12 md:hidden">
           <div
             ref={trackRef}
             onScroll={onScroll}
@@ -171,7 +177,7 @@ export function Testimonials() {
               type="button"
               onClick={() => scrollTo(active - 1)}
               aria-label="Depoimento anterior"
-              className="flex size-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="flex size-11 items-center justify-center rounded-full border border-hairline bg-elev-1 text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
             >
               <ChevronLeft className="size-5" />
             </button>
@@ -192,7 +198,7 @@ export function Testimonials() {
               type="button"
               onClick={() => scrollTo(active + 1)}
               aria-label="Próximo depoimento"
-              className="flex size-11 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="flex size-11 items-center justify-center rounded-full border border-hairline bg-elev-1 text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
             >
               <ChevronRight className="size-5" />
             </button>
