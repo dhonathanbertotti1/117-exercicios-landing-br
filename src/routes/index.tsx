@@ -107,9 +107,9 @@ const plans = [
   {
     key: "basic" as const,
     name: "Plano Básico",
-    price: "R$ 19,10",
+    price: "R$ 19,90",
     original: "R$ 47,00",
-    saving: "Economize R$ 27,90",
+    saving: "Economize R$ 27,10",
     href: "https://payment.ticto.app/O3BB8B683",
     cta: "Quero o básico",
     featured: false,
@@ -234,7 +234,7 @@ function Index() {
                 <p className="text-sm text-muted-foreground">
                   a partir de{" "}
                   <strong className="font-display text-lg font-extrabold text-foreground">
-                    R$ 19,10
+                    R$ 19,90
                   </strong>
                 </p>
               </div>
@@ -476,7 +476,7 @@ function Index() {
         </div>
 
         <p className="mx-auto mt-10 max-w-xl text-center text-base text-muted-foreground">
-          A diferença entre os dois é de <strong className="font-bold text-primary">R$ 8,80</strong>{" "}
+          A diferença entre os dois é de <strong className="font-bold text-primary">R$ 8,00</strong>{" "}
           — e o Premium leva os 3 bônus completos, R$ 105,00 em material extra.
         </p>
       </section>
