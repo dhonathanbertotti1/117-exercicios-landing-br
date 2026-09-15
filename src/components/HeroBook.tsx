@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import { HEADLINE_DISCOUNT } from "@/lib/pricing";
+
 // Recorte da capa colado ao livro: quanto menos fundo da fotografia sobrar,
 // menos se nota a juncao feita pelo mix-blend-mode.
 import ebookCover from "@/assets/ebook-cover-3d.jpg";
@@ -78,7 +80,7 @@ export function HeroBook() {
           />
 
           <div className="hero-book__badge">
-            <span className="text-2xl font-extrabold leading-none">92%</span>
+            <span className="text-2xl font-extrabold leading-none">{HEADLINE_DISCOUNT}%</span>
             <span className="text-xs font-bold uppercase">OFF</span>
           </div>
         </div>

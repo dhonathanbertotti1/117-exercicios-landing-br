@@ -79,7 +79,7 @@ O livro no hero é a fotografia `src/assets/ebook-cover-3d.jpg` tratada como obj
 - **levitação** contínua de 20px, com a sombra no chão a encolher e desvanecer à medida que o livro sobe;
 - **inclinação** que segue o cursor (`rotateX`/`rotateY` via variáveis CSS, atualizadas em `requestAnimationFrame`);
 - **aura** teal pulsante por trás, a ecoar os anéis de néon da capa;
-- **selo dos 92%** à frente no eixo Z e fora de fase, para os planos não se moverem em bloco.
+- **selo do desconto** à frente no eixo Z e fora de fase, para os planos não se moverem em bloco.
 
 A fotografia tem o fundo quase preto: o `mix-blend-mode: screen` funde-o com o fundo da secção e as máscaras em gradiente esbatem as quatro arestas, para não se ver o retângulo do enquadramento. O ficheiro `ebook-cover.jpg` é o original sem recorte, mantido como fonte.
 

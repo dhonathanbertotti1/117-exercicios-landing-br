@@ -1,6 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, X, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
+import { Check, Lock, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
 import { SalesNotification } from "@/components/SalesNotification";
+import {
+  PRICES,
+  BONUS_PRICES,
+  BONUS_TOTAL,
+  HEADLINE_DISCOUNT,
+  formatBRL,
+  savings,
+} from "@/lib/pricing";
 
 import { Faq } from "@/components/Faq";
 import { HeroBook } from "@/components/HeroBook";
@@ -41,11 +49,14 @@ const heroBullets = [
 
 /** Numeros que sustentam a promessa. Todos saem do proprio material. */
 const stats = [
-  { icon: Layers, value: "117", label: "exercícios únicos, sem repetição" },
-  { icon: Zap, value: "3", label: "fases, da base ao desempenho" },
+  // countTo: anima de 0 ate ao numero. Fica de fora onde nao faz sentido —
+  // o intervalo "15-30" nao e um numero, e o 0 dos equipamentos e o argumento
+  // (nao se precisa de nada), nao um contador por comecar.
+  { icon: Layers, value: "117", countTo: 117, label: "exercícios únicos, sem repetição" },
+  { icon: Zap, value: "3", countTo: 3, label: "fases, da base ao desempenho" },
   { icon: Clock, value: "15–30", label: "minutos por treino" },
   { icon: Ban, value: "0", label: "equipamentos necessários" },
-];
+] as const;
 
 const categorias = [
   {
@@ -71,23 +82,48 @@ const bonus = [
     img: bonusLowCarb,
     title: "Plano de Emagrecimento e Definição",
     text: "Um plano completo para acelerar a queima de gordura e definir o corpo, com orientações práticas de treino e alimentação.",
-    originalPrice: "R$ 25,00",
+    price: BONUS_PRICES.emagrecimento,
   },
   {
     tag: "Bônus #2",
     img: bonusAnabolica,
     title: "Guia de Treino para CORE",
     text: "Fortaleça o centro do seu corpo com treinos focados no CORE, melhorando a postura, o equilíbrio e o desempenho nos exercícios.",
-    originalPrice: "R$ 35,00",
+    price: BONUS_PRICES.core,
   },
   {
     tag: "Bônus #3",
     img: bonusSaudavel,
     title: "40 Planos de Treino Pesado",
     text: "40 planos de treino pesado prontos para usar para variar os seus treinos e continuar evoluindo em força e hipertrofia.",
-    originalPrice: "R$ 45,00",
+    price: BONUS_PRICES.treinoPesado,
   },
 ];
+
+/**
+ * Beneficios na ordem em que aparecem nos dois cartoes.
+ *
+ * `bonus: true` marca o que e exclusivo do Premium — e essa a unica regra que
+ * separa os planos, por isso fica escrita uma vez so, aqui.
+ */
+const benefits = [
+  { label: "117 Exercícios de Mobilidade e Estabilidade", bonus: false },
+  { label: "Acesso imediato", bonus: false },
+  { label: "Garantia de 7 dias", bonus: false },
+  { label: "Plano de Emagrecimento e Definição", bonus: true },
+  { label: "Guia de Treino para CORE", bonus: true },
+  { label: "40 Planos de Treino Pesado", bonus: true },
+];
+
+type PlanKey = "premium" | "basic";
+
+/** A lista de um plano: os bonus so entram como incluidos no Premium. */
+function featuresFor(key: PlanKey) {
+  return benefits.map((b) => ({
+    label: b.label,
+    included: key === "premium" || !b.bonus,
+  }));
+}
 
 /* O Premium vem primeiro: e a oferta que queremos que seja lida como padrao.
  * Quem chega ao bloco de precos ve primeiro o pacote completo e so depois a
@@ -96,33 +132,26 @@ const plans = [
   {
     key: "premium" as const,
     name: "Plano Premium",
-    price: "R$ 27,90",
-    original: "R$ 97,00",
-    saving: "Economize R$ 69,10",
+    price: formatBRL(PRICES.premium),
+    original: formatBRL(PRICES.premiumAnchor),
+    saving: `Economize ${formatBRL(savings(PRICES.premium, PRICES.premiumAnchor))}`,
     href: "https://payment.ticto.app/OF82F3D36",
     cta: "Quero o premium",
     featured: true,
-    note: "Inclui os 3 bônus — R$ 105,00 em extras.",
+    note: `Inclui os 3 bônus — ${formatBRL(BONUS_TOTAL)} em extras.`,
+    features: featuresFor("premium"),
   },
   {
     key: "basic" as const,
     name: "Plano Básico",
-    price: "R$ 19,90",
-    original: "R$ 47,00",
-    saving: "Economize R$ 27,10",
+    price: formatBRL(PRICES.basic),
+    original: formatBRL(PRICES.basicAnchor),
+    saving: `Economize ${formatBRL(savings(PRICES.basic, PRICES.basicAnchor))}`,
     href: "https://payment.ticto.app/O3BB8B683",
     cta: "Quero o básico",
     featured: false,
+    features: featuresFor("basic"),
   },
-];
-
-const comparisonFeatures = [
-  { label: "117 Exercícios de Mobilidade e Estabilidade", basic: true, premium: true },
-  { label: "Acesso imediato", basic: true, premium: true },
-  { label: "Garantia de 7 dias", basic: true, premium: true },
-  { label: "Plano de Emagrecimento e Definição", basic: false, premium: true },
-  { label: "Guia de Treino para CORE", basic: false, premium: true },
-  { label: "40 Planos de Treino Pesado", basic: false, premium: true },
 ];
 
 const trustChips = ["Garantia de 7 dias", "Acesso imediato", "Pagamento único", "Abre no celular"];
@@ -200,7 +229,7 @@ function Index() {
           <div className="text-center lg:text-left">
             <Eyebrow>
               <span className="inline-block size-1.5 rounded-full bg-primary" />
-              Oferta especial · 92% de desconto
+              Oferta especial · {HEADLINE_DISCOUNT}% de desconto
             </Eyebrow>
 
             <h1 className="font-display mt-7 text-[2.5rem] font-extrabold leading-[1.04] text-foreground sm:text-5xl lg:text-[3.5rem]">
@@ -234,7 +263,7 @@ function Index() {
                 <p className="text-sm text-muted-foreground">
                   a partir de{" "}
                   <strong className="font-display text-lg font-extrabold text-foreground">
-                    R$ 19,90
+                    {formatBRL(PRICES.basic)}
                   </strong>
                 </p>
               </div>
@@ -260,7 +289,7 @@ function Index() {
                 <div className="flex flex-col items-center gap-2 text-center">
                   <s.icon className="size-5 text-primary/70" />
                   <dt className="font-display text-3xl font-extrabold leading-none text-foreground md:text-4xl">
-                    {s.value === "117" ? <CountUp to={117} /> : s.value}
+                    {"countTo" in s && s.countTo ? <CountUp to={s.countTo} /> : s.value}
                   </dt>
                   <dd className="max-w-[9rem] text-xs leading-snug text-muted-foreground">
                     {s.label}
@@ -357,7 +386,7 @@ function Index() {
                     {b.title}
                   </h3>
                   <p className="mt-2 text-xs font-semibold text-muted-foreground">
-                    Valor: <span className="line-through">{b.originalPrice}</span>{" "}
+                    Valor: <span className="line-through">{formatBRL(b.price)}</span>{" "}
                     <span className="text-primary">grátis</span>
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{b.text}</p>
@@ -370,7 +399,7 @@ function Index() {
         <div className="mx-auto mt-10 flex max-w-2xl items-center justify-center gap-3 rounded-2xl border border-primary/25 bg-primary/10 px-6 py-5 text-center">
           <Gift className="size-5 shrink-0 text-primary" />
           <p className="font-display text-base font-extrabold text-foreground md:text-lg">
-            R$ 105,00 em bônus — inclusos no Plano Premium.
+            {formatBRL(BONUS_TOTAL)} em bônus — inclusos no Plano Premium.
           </p>
         </div>
       </section>
@@ -430,27 +459,30 @@ function Index() {
                 </p>
 
                 <ul className="mt-7 space-y-3.5 border-t border-hairline pt-7">
-                  {comparisonFeatures.map((f) => {
-                    const incluido = plan.key === "premium" ? f.premium : f.basic;
-                    return (
-                      <li key={f.label} className="flex items-start gap-3 text-sm leading-snug">
-                        {incluido ? (
-                          <Check className="mt-0.5 size-[18px] shrink-0 text-primary" />
-                        ) : (
-                          <X className="mt-0.5 size-[18px] shrink-0 text-muted-foreground/35" />
-                        )}
-                        <span
-                          className={
-                            incluido
-                              ? "text-foreground/90"
-                              : "text-muted-foreground/45 line-through"
-                          }
-                        >
-                          {f.label}
-                        </span>
-                      </li>
-                    );
-                  })}
+                  {plan.features.map((f) => (
+                    <li key={f.label} className="flex items-start gap-3 text-sm leading-snug">
+                      {f.included ? (
+                        <Check className="mt-0.5 size-[18px] shrink-0 text-primary" />
+                      ) : (
+                        /* Cadeado, nao X: o item nao esta ausente do produto,
+                           esta trancado atras do Premium. */
+                        <Lock
+                          className="mt-0.5 size-[18px] shrink-0 text-muted-foreground/40"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span
+                        className={
+                          f.included
+                            ? "text-foreground/90"
+                            : "text-muted-foreground/45 line-through"
+                        }
+                      >
+                        {f.label}
+                      </span>
+                      {!f.included && <span className="sr-only">(só no Plano Premium)</span>}
+                    </li>
+                  ))}
                 </ul>
 
                 {/* mt-auto encosta o botao ao fundo, para os dois cartoes
@@ -476,8 +508,11 @@ function Index() {
         </div>
 
         <p className="mx-auto mt-10 max-w-xl text-center text-base text-muted-foreground">
-          A diferença entre os dois é de <strong className="font-bold text-primary">R$ 8,00</strong>{" "}
-          — e o Premium leva os 3 bônus completos, R$ 105,00 em material extra.
+          A diferença entre os dois é de{" "}
+          <strong className="font-bold text-primary">
+            {formatBRL(PRICES.premium - PRICES.basic)}
+          </strong>{" "}
+          — e o Premium leva os 3 bônus completos, {formatBRL(BONUS_TOTAL)} em material extra.
         </p>
       </section>
 
