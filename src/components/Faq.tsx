@@ -27,8 +27,8 @@ const faqs = [
     a: "A maioria dos treinos leva entre 15 e 30 minutos, encaixando na rotina mesmo de quem tem pouco tempo livre.",
   },
   {
-    q: "Qual é a diferença entre o Plano Básico e o Premium?",
-    a: "O Plano Básico inclui o material com os 117 exercícios. O Plano Premium inclui tudo o que vem no Básico mais 3 bônus exclusivos: Plano de Emagrecimento e Definição, Guia de Treino para CORE e 40 Planos de Treino Pesado.",
+    q: "O que exatamente vem no pacote?",
+    a: "Vem o material completo com os 117 exercícios mais os 3 bônus: Plano de Emagrecimento e Definição, Guia de Treino para CORE e 40 Planos de Treino Pesado. Não há versão reduzida nem upgrade a pagar depois — é tudo num pagamento só.",
   },
   {
     q: "E se eu não gostar do material?",

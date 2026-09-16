@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Lock, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
+import { Check, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
 import { SalesNotification } from "@/components/SalesNotification";
 import {
   PRICES,
@@ -100,59 +100,27 @@ const bonus = [
   },
 ];
 
-/**
- * Beneficios na ordem em que aparecem nos dois cartoes.
- *
- * `bonus: true` marca o que e exclusivo do Premium — e essa a unica regra que
- * separa os planos, por isso fica escrita uma vez so, aqui.
- */
-const benefits = [
-  { label: "117 Exercícios de Mobilidade e Estabilidade", bonus: false },
-  { label: "Acesso imediato", bonus: false },
-  { label: "Garantia de 7 dias", bonus: false },
-  { label: "Plano de Emagrecimento e Definição", bonus: true },
-  { label: "Guia de Treino para CORE", bonus: true },
-  { label: "40 Planos de Treino Pesado", bonus: true },
+/** O que vai dentro do pacote, na ordem em que aparece no cartao. */
+const included = [
+  "117 Exercícios de Mobilidade e Estabilidade",
+  "Plano de Emagrecimento e Definição",
+  "Guia de Treino para CORE",
+  "40 Planos de Treino Pesado",
+  "Acesso imediato",
+  "Garantia de 7 dias",
 ];
 
-type PlanKey = "premium" | "basic";
-
-/** A lista de um plano: os bonus so entram como incluidos no Premium. */
-function featuresFor(key: PlanKey) {
-  return benefits.map((b) => ({
-    label: b.label,
-    included: key === "premium" || !b.bonus,
-  }));
-}
-
-/* O Premium vem primeiro: e a oferta que queremos que seja lida como padrao.
- * Quem chega ao bloco de precos ve primeiro o pacote completo e so depois a
- * versao reduzida, em vez de ancorar no mais barato. */
-const plans = [
-  {
-    key: "premium" as const,
-    name: "Plano Premium",
-    price: formatBRL(PRICES.premium),
-    original: formatBRL(PRICES.premiumAnchor),
-    saving: `Economize ${formatBRL(savings(PRICES.premium, PRICES.premiumAnchor))}`,
-    href: "https://payment.ticto.app/OF82F3D36",
-    cta: "Quero o premium",
-    featured: true,
-    note: `Inclui os 3 bônus — ${formatBRL(BONUS_TOTAL)} em extras.`,
-    features: featuresFor("premium"),
-  },
-  {
-    key: "basic" as const,
-    name: "Plano Básico",
-    price: formatBRL(PRICES.basic),
-    original: formatBRL(PRICES.basicAnchor),
-    saving: `Economize ${formatBRL(savings(PRICES.basic, PRICES.basicAnchor))}`,
-    href: "https://payment.ticto.app/O3BB8B683",
-    cta: "Quero o básico",
-    featured: false,
-    features: featuresFor("basic"),
-  },
-];
+/** A oferta. E uma so: nao ha plano a comparar, tudo esta incluido. */
+const offer = {
+  name: "Acesso Completo",
+  price: formatBRL(PRICES.offer),
+  original: formatBRL(PRICES.offerAnchor),
+  saving: `Economize ${formatBRL(savings(PRICES.offer, PRICES.offerAnchor))}`,
+  href: "https://payment.ticto.app/OF82F3D36",
+  cta: "Quero acessar agora",
+  note: `Inclui os 3 bônus — ${formatBRL(BONUS_TOTAL)} em extras.`,
+  included,
+};
 
 const trustChips = ["Garantia de 7 dias", "Acesso imediato", "Pagamento único", "Abre no celular"];
 
@@ -261,10 +229,11 @@ function Index() {
               <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
                 <CtaButton>Quero acessar o material</CtaButton>
                 <p className="text-sm text-muted-foreground">
-                  a partir de{" "}
+                  por{" "}
                   <strong className="font-display text-lg font-extrabold text-foreground">
-                    {formatBRL(PRICES.basic)}
-                  </strong>
+                    {formatBRL(PRICES.offer)}
+                  </strong>{" "}
+                  <span className="line-through">{formatBRL(PRICES.offerAnchor)}</span>
                 </p>
               </div>
               <div className="lg:[&>ul]:justify-start">
@@ -359,7 +328,7 @@ function Index() {
               +3 bônus para quem adquirir <span className="text-primary">hoje</span>
             </>
           }
-          lead="Além do material principal, você recebe acesso imediato a estes bônus — inclusos no Plano Premium."
+          lead="Além do material principal, você recebe acesso imediato a estes bônus — todos inclusos, sem custo extra."
         />
 
         <div className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-3">
@@ -399,7 +368,7 @@ function Index() {
         <div className="mx-auto mt-10 flex max-w-2xl items-center justify-center gap-3 rounded-2xl border border-primary/25 bg-primary/10 px-6 py-5 text-center">
           <Gift className="size-5 shrink-0 text-primary" />
           <p className="font-display text-base font-extrabold text-foreground md:text-lg">
-            {formatBRL(BONUS_TOTAL)} em bônus — inclusos no Plano Premium.
+            {formatBRL(BONUS_TOTAL)} em bônus — inclusos no preço.
           </p>
         </div>
       </section>
@@ -407,112 +376,70 @@ function Index() {
       {/* DEPOIMENTOS */}
       <Testimonials />
 
-      {/* PLANOS — o Premium primeiro, e visualmente dominante. */}
+      {/* OFERTA — uma so, centrada. Nao ha comparacao a fazer. */}
       <section
         id="planos"
         className="section-glow scroll-mt-8 px-6 py-20 md:py-28"
         style={{ "--glow-top": "-4%", "--glow-size": "800px" } as React.CSSProperties}
       >
         <SectionHeading
-          eyebrow="Escolha o seu plano"
+          eyebrow="A oferta"
           title={
             <>
-              Dois caminhos. <span className="text-primary">A maioria escolhe o Premium.</span>
+              Tudo incluído, <span className="text-primary">num pagamento único</span>
             </>
           }
-          lead="Pagamento único, acesso imediato após a confirmação e garantia de 7 dias nos dois planos."
+          lead="O material completo mais os 3 bônus. Acesso imediato após a confirmação e garantia de 7 dias."
         />
 
-        <div className="mx-auto mt-16 grid max-w-4xl gap-6 md:grid-cols-2 md:items-stretch">
-          {plans.map((plan, i) => (
-            <Reveal key={plan.key} delay={i * 120} className="h-full">
-              <div
-                className={`relative flex h-full flex-col rounded-3xl p-7 text-left sm:p-8 ${
-                  plan.featured
-                    ? "plan-featured md:-mt-3 md:pb-10"
-                    : "border border-hairline bg-elev-1/60"
-                }`}
-              >
-                {plan.featured && (
-                  <span className="eyebrow absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[10px] font-bold text-primary-foreground shadow-lg shadow-primary/30">
-                    <Star className="size-3 fill-gold text-gold" /> Mais vendido
-                  </span>
-                )}
+        <div className="mx-auto mt-16 max-w-md">
+          <Reveal>
+            <div className="plan-featured relative flex flex-col rounded-3xl p-7 text-left sm:p-9">
+              <span className="eyebrow absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-[10px] font-bold text-primary-foreground shadow-lg shadow-primary/30">
+                <Star className="size-3 fill-gold text-gold" /> Tudo incluído
+              </span>
 
-                <p className="eyebrow text-[11px] font-bold text-primary">{plan.name}</p>
+              <p className="eyebrow text-[11px] font-bold text-primary">{offer.name}</p>
 
-                <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span
-                    className={`font-display font-extrabold leading-none text-foreground ${
-                      plan.featured ? "text-[3.4rem]" : "text-5xl"
-                    }`}
-                  >
-                    {plan.price}
-                  </span>
-                  <span className="text-sm font-bold text-muted-foreground line-through">
-                    {plan.original}
-                  </span>
-                </div>
-
-                <p className="mt-2.5 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/12 px-3 py-1 text-xs font-bold text-primary">
-                  {plan.saving}
-                </p>
-
-                <ul className="mt-7 space-y-3.5 border-t border-hairline pt-7">
-                  {plan.features.map((f) => (
-                    <li key={f.label} className="flex items-start gap-3 text-sm leading-snug">
-                      {f.included ? (
-                        <Check className="mt-0.5 size-[18px] shrink-0 text-primary" />
-                      ) : (
-                        /* Cadeado, nao X: o item nao esta ausente do produto,
-                           esta trancado atras do Premium. */
-                        <Lock
-                          className="mt-0.5 size-[18px] shrink-0 text-muted-foreground/40"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span
-                        className={
-                          f.included
-                            ? "text-foreground/90"
-                            : "text-muted-foreground/45 line-through"
-                        }
-                      >
-                        {f.label}
-                      </span>
-                      {!f.included && <span className="sr-only">(só no Plano Premium)</span>}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* mt-auto encosta o botao ao fundo, para os dois cartoes
-                    terminarem alinhados mesmo com listas de alturas diferentes */}
-                <div className="mt-auto pt-8">
-                  {plan.note && (
-                    <p className="mb-4 text-center text-xs font-bold text-primary">{plan.note}</p>
-                  )}
-                  <a
-                    href={plan.href}
-                    className={`block w-full rounded-full px-5 py-4 text-center text-sm font-extrabold uppercase tracking-[0.08em] transition-transform duration-300 hover:scale-[1.03] sm:text-base ${
-                      plan.featured
-                        ? "cta-shine bg-primary text-primary-foreground shadow-[0_18px_40px_-12px] shadow-primary/60"
-                        : "border border-hairline bg-elev-2 text-foreground hover:border-primary/40"
-                    }`}
-                  >
-                    {plan.cta}
-                  </a>
-                </div>
+              <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-display text-[3.4rem] font-extrabold leading-none text-foreground">
+                  {offer.price}
+                </span>
+                <span className="text-sm font-bold text-muted-foreground line-through">
+                  {offer.original}
+                </span>
               </div>
-            </Reveal>
-          ))}
+
+              <p className="mt-2.5 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/12 px-3 py-1 text-xs font-bold text-primary">
+                {offer.saving}
+              </p>
+
+              <ul className="mt-7 space-y-3.5 border-t border-hairline pt-7">
+                {offer.included.map((label) => (
+                  <li key={label} className="flex items-start gap-3 text-sm leading-snug">
+                    <Check className="mt-0.5 size-[18px] shrink-0 text-primary" />
+                    <span className="text-foreground/90">{label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-8">
+                <p className="mb-4 text-center text-xs font-bold text-primary">{offer.note}</p>
+                <a
+                  href={offer.href}
+                  className="cta-shine block w-full rounded-full bg-primary px-5 py-4 text-center text-sm font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_18px_40px_-12px] shadow-primary/60 transition-transform duration-300 hover:scale-[1.03] sm:text-base"
+                >
+                  {offer.cta}
+                </a>
+              </div>
+            </div>
+          </Reveal>
         </div>
 
         <p className="mx-auto mt-10 max-w-xl text-center text-base text-muted-foreground">
-          A diferença entre os dois é de{" "}
-          <strong className="font-bold text-primary">
-            {formatBRL(PRICES.premium - PRICES.basic)}
-          </strong>{" "}
-          — e o Premium leva os 3 bônus completos, {formatBRL(BONUS_TOTAL)} em material extra.
+          São {formatBRL(BONUS_TOTAL)} só em bônus, inclusos no preço — e o material principal por{" "}
+          <strong className="font-bold text-primary">{formatBRL(PRICES.offer)}</strong>, uma vez só,
+          com acesso vitalício.
         </p>
       </section>
 

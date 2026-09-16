@@ -36,13 +36,13 @@ export function StickyCta() {
   return (
     <div className={`sticky-cta ${visible ? "is-visible" : ""}`} aria-hidden={!visible}>
       <div className="min-w-0">
-        <p className="eyebrow text-[9px] font-bold text-primary">Plano Premium</p>
+        <p className="eyebrow text-[9px] font-bold text-primary">Acesso Completo</p>
         <p className="mt-0.5 flex items-baseline gap-2">
           <span className="font-display text-xl font-extrabold leading-none text-foreground">
-            {formatBRL(PRICES.premium)}
+            {formatBRL(PRICES.offer)}
           </span>
           <span className="text-xs font-semibold text-muted-foreground line-through">
-            {formatBRL(PRICES.premiumAnchor)}
+            {formatBRL(PRICES.offerAnchor)}
           </span>
         </p>
       </div>

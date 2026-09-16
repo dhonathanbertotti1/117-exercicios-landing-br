@@ -50,7 +50,7 @@ const regions = [
   "Vitória",
 ];
 
-const packages = ["Plano Básico", "Plano Premium"];
+const packages = ["Acesso Completo"];
 
 const timesAgo = [
   "há 30 segundos",
