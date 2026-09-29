@@ -10,7 +10,7 @@
  */
 export const PRICES = {
   /** O que o checkout cobra. */
-  offer: 39.9,
+  offer: 19.9,
   /** Valor de referencia riscado ao lado do preco. */
   offerAnchor: 97.0,
 } as const;
@@ -25,17 +25,17 @@ export const BONUS_PRICES = {
 export const BONUS_TOTAL = Object.values(BONUS_PRICES).reduce((a, b) => a + b, 0);
 
 /**
- * "R$ 39,90".
+ * "R$ 19,90".
  *
  * Feito a mao em vez de Intl.NumberFormat: o formatador do pt-BR usa espaco
  * nao separavel entre o simbolo e o numero, o que mudaria o texto ja
- * publicado e partiria qualquer procura por "R$ 39,90" no projeto.
+ * publicado e partiria qualquer procura por "R$ 19,90" no projeto.
  */
 export function formatBRL(value: number): string {
   return `R$ ${value.toFixed(2).replace(".", ",")}`;
 }
 
-/** Percentagem de desconto, arredondada. 39,90 sobre 97,00 da 59. */
+/** Percentagem de desconto, arredondada. 19,90 sobre 97,00 da 79. */
 export function discountPercent(price: number, anchor: number): number {
   return Math.round((1 - price / anchor) * 100);
 }
