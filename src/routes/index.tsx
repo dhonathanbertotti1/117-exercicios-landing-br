@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
+import { Check, Lock, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
 import { SalesNotification } from "@/components/SalesNotification";
 import {
   PRICES,
@@ -16,6 +17,7 @@ import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { StickyCta } from "@/components/StickyCta";
 import { Testimonials } from "@/components/Testimonials";
+import { UpsellDialog } from "@/components/UpsellDialog";
 import bonusLowCarb from "@/assets/bonus-lowcarb.jpg";
 import bonusAnabolica from "@/assets/bonus-anabolica.jpg";
 import bonusSaudavel from "@/assets/bonus-saudavel.jpg";
@@ -110,7 +112,7 @@ const included = [
   "Garantia de 7 dias",
 ];
 
-/** A oferta. E uma so: nao ha plano a comparar, tudo esta incluido. */
+/** A oferta principal: material completo mais os 3 bonus. */
 const offer = {
   name: "Acesso Completo",
   price: formatBRL(PRICES.offer),
@@ -120,6 +122,39 @@ const offer = {
   cta: "Quero acessar agora",
   note: `Inclui os 3 bônus — ${formatBRL(BONUS_TOTAL)} em extras.`,
   included,
+};
+
+/**
+ * Checkout da oferta de entrada (o cronograma, R$ 9,90).
+ *
+ * Enquanto estiver vazio, a oferta de entrada NAO aparece na pagina: um botao
+ * de compra a apontar para lado nenhum perde a venda e ainda queima a
+ * confianca de quem clicou. Preencher com o link do Ticto para a publicar.
+ */
+const SCHEDULE_CHECKOUT_URL = "";
+
+/**
+ * A oferta de entrada.
+ *
+ * So o cronograma: os 117 exercicios e os 3 bonus ficam de fora, riscados, a
+ * mostrar o que nao vem. E o que sustenta o upsell no pop-up.
+ */
+const scheduleOffer = {
+  name: "Só o Cronograma",
+  price: formatBRL(PRICES.schedule),
+  cta: "Quero só o cronograma",
+  href: SCHEDULE_CHECKOUT_URL,
+  // TODO: confirmar o nome e a descricao exatos do material, como estavam no
+  // order bump do checkout.
+  items: [
+    { label: "Cronograma de exercícios", included: true },
+    { label: "Acesso imediato", included: true },
+    { label: "Garantia de 7 dias", included: true },
+    { label: "117 Exercícios de Mobilidade e Estabilidade", included: false },
+    { label: "Plano de Emagrecimento e Definição", included: false },
+    { label: "Guia de Treino para CORE", included: false },
+    { label: "40 Planos de Treino Pesado", included: false },
+  ],
 };
 
 const trustChips = ["Garantia de 7 dias", "Acesso imediato", "Pagamento único", "Abre no celular"];
@@ -186,6 +221,8 @@ function SectionHeading({
 }
 
 function Index() {
+  const [upsellOpen, setUpsellOpen] = useState(false);
+
   return (
     <main className="grain font-sans">
       <SalesNotification />
@@ -441,7 +478,69 @@ function Index() {
           <strong className="font-bold text-primary">{formatBRL(PRICES.offer)}</strong>, uma vez só,
           com acesso vitalício.
         </p>
+
+        {/* OFERTA DE ENTRADA — so aparece quando houver checkout configurado. */}
+        {SCHEDULE_CHECKOUT_URL && (
+          <div className="mx-auto mt-14 max-w-md">
+            <Reveal>
+              <div className="rounded-3xl border border-hairline bg-elev-1/60 p-7 text-left sm:p-8">
+                <p className="eyebrow text-[11px] font-bold text-muted-foreground">
+                  {scheduleOffer.name}
+                </p>
+
+                <div className="mt-4 flex flex-wrap items-baseline gap-x-3">
+                  <span className="font-display text-4xl font-extrabold leading-none text-foreground">
+                    {scheduleOffer.price}
+                  </span>
+                  <span className="text-sm text-muted-foreground">só o material de cronograma</span>
+                </div>
+
+                <ul className="mt-6 space-y-3 border-t border-hairline pt-6">
+                  {scheduleOffer.items.map((item) => (
+                    <li key={item.label} className="flex items-start gap-3 text-sm leading-snug">
+                      {item.included ? (
+                        <Check className="mt-0.5 size-[18px] shrink-0 text-primary" />
+                      ) : (
+                        <Lock
+                          className="mt-0.5 size-[18px] shrink-0 text-muted-foreground/40"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span
+                        className={
+                          item.included
+                            ? "text-foreground/90"
+                            : "text-muted-foreground/45 line-through"
+                        }
+                      >
+                        {item.label}
+                      </span>
+                      {!item.included && <span className="sr-only">(não incluído)</span>}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Abre o pop-up em vez de ir direto ao checkout: e o ultimo
+                    ponto em que da para oferecer o pacote completo. */}
+                <button
+                  type="button"
+                  onClick={() => setUpsellOpen(true)}
+                  className="mt-8 block w-full rounded-full border border-hairline bg-elev-2 px-5 py-4 text-center text-sm font-extrabold uppercase tracking-[0.08em] text-foreground transition-colors duration-300 hover:border-primary/40"
+                >
+                  {scheduleOffer.cta}
+                </button>
+              </div>
+            </Reveal>
+          </div>
+        )}
       </section>
+
+      <UpsellDialog
+        open={upsellOpen}
+        onOpenChange={setUpsellOpen}
+        fullHref={offer.href}
+        scheduleHref={SCHEDULE_CHECKOUT_URL}
+      />
 
       {/* GARANTIA */}
       <section className="px-6 pb-20 md:pb-28">
