@@ -44,13 +44,13 @@ export function UpsellDialog({
             </span>
 
             <Dialog.Title className="font-display mt-5 text-2xl font-extrabold leading-tight text-foreground sm:text-[1.75rem]">
-              Por mais <span className="text-primary">{formatBRL(UPGRADE_DIFFERENCE)}</span> você
-              leva tudo
+              Quer levar os <span className="text-primary">117 exercícios</span> por mais{" "}
+              <span className="text-primary">{formatBRL(UPGRADE_DIFFERENCE)}</span>?
             </Dialog.Title>
 
             <Dialog.Description className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Você está levando só o cronograma. Por {formatBRL(UPGRADE_DIFFERENCE)} a mais, leva
-              também o pacote completo dos 117 exercícios e os 3 bônus.
+              O cronograma diz o que treinar em cada dia. Os 117 exercícios são o conteúdo que
+              preenche esses dias — e vêm com os 3 bônus inclusos.
             </Dialog.Description>
 
             <ul className="mx-auto mt-6 max-w-xs space-y-2.5 text-left">
@@ -78,18 +78,20 @@ export function UpsellDialog({
 
             <a
               href={fullHref}
-              className="cta-shine mt-6 block w-full rounded-full bg-primary px-5 py-4 text-center text-sm font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_18px_40px_-12px] shadow-primary/60 transition-transform duration-300 hover:scale-[1.03] sm:text-base"
+              className="cta-shine mt-6 block w-full rounded-full bg-primary px-5 py-5 text-center text-base font-extrabold uppercase tracking-[0.08em] text-primary-foreground shadow-[0_18px_40px_-12px] shadow-primary/60 transition-transform duration-300 hover:scale-[1.03]"
             >
-              Sim, quero levar tudo
+              Adicionar os 117 exercícios
             </a>
 
-            {/* A recusa nao e um botao: e uma linha sublinhada, discreta, mas
-                sempre a vista e a levar mesmo ao checkout de R$ 9,90. */}
+            {/* A recusa: pequena e apagada, como pedido, mas continua a ser um
+                link a serio — sublinhado, com area de toque suficiente e a
+                escurecer no hover, para quem a procura a encontrar. Leva mesmo
+                ao checkout de R$ 9,90, sem desvios. */}
             <a
               href={scheduleHref}
-              className="mx-auto mt-5 block w-fit text-xs text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+              className="mx-auto mt-4 block w-fit px-2 py-1 text-[10px] text-destructive/40 underline underline-offset-2 transition-colors duration-200 hover:text-destructive/80"
             >
-              Não, quero só o cronograma por {formatBRL(PRICES.schedule)}
+              Não quero, seguir só com o cronograma
             </a>
           </div>
         </Dialog.Content>

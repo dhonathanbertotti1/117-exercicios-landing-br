@@ -140,14 +140,17 @@ const SCHEDULE_CHECKOUT_URL = "";
  * mostrar o que nao vem. E o que sustenta o upsell no pop-up.
  */
 const scheduleOffer = {
-  name: "Só o Cronograma",
+  name: "Cronograma Semanal de Mobilidade",
   price: formatBRL(PRICES.schedule),
-  cta: "Quero só o cronograma",
+  cta: "Quero o cronograma",
   href: SCHEDULE_CHECKOUT_URL,
-  // TODO: confirmar o nome e a descricao exatos do material, como estavam no
-  // order bump do checkout.
+  /* A descricao posiciona o cronograma como o mapa da semana: util por si so,
+     mas que so fica cheio com os exercicios. E o que prepara o upsell do
+     pop-up sem prometer nada que o material nao tenha. */
+  description:
+    "A sua semana de mobilidade organizada: o que treinar em cada dia, sem ter de decidir nada. O cronograma monta a rotina — os 117 exercícios são o que preenche cada dia dela.",
   items: [
-    { label: "Cronograma de exercícios", included: true },
+    { label: "Cronograma Semanal de Mobilidade", included: true },
     { label: "Acesso imediato", included: true },
     { label: "Garantia de 7 dias", included: true },
     { label: "117 Exercícios de Mobilidade e Estabilidade", included: false },
@@ -492,8 +495,12 @@ function Index() {
                   <span className="font-display text-4xl font-extrabold leading-none text-foreground">
                     {scheduleOffer.price}
                   </span>
-                  <span className="text-sm text-muted-foreground">só o material de cronograma</span>
+                  <span className="text-sm text-muted-foreground">pagamento único</span>
                 </div>
+
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {scheduleOffer.description}
+                </p>
 
                 <ul className="mt-6 space-y-3 border-t border-hairline pt-6">
                   {scheduleOffer.items.map((item) => (
