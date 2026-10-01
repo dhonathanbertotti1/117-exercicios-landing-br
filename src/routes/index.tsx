@@ -134,6 +134,17 @@ const offer = {
 const SCHEDULE_CHECKOUT_URL = "https://payment.ticto.app/O786A2996";
 
 /**
+ * Checkout do upsell, usado SO pelo botao do pop-up.
+ *
+ * E uma oferta a parte, que da acesso ao cronograma E aos 117 exercicios — e
+ * por isso nao e a mesma do cartao principal. Quem entra por aqui veio pelo
+ * caminho do cronograma e esta a acrescentar os exercicios por cima; quem
+ * clica no cartao de cima compra so o pacote completo, noutra oferta.
+ * Trocar um pelo outro vende a coisa errada, por isso sao duas constantes.
+ */
+const UPGRADE_CHECKOUT_URL = "https://payment.ticto.app/O274ED8C9";
+
+/**
  * A oferta de entrada.
  *
  * So o cronograma: os 117 exercicios e os 3 bonus ficam de fora, riscados, a
@@ -545,7 +556,7 @@ function Index() {
       <UpsellDialog
         open={upsellOpen}
         onOpenChange={setUpsellOpen}
-        fullHref={offer.href}
+        fullHref={UPGRADE_CHECKOUT_URL}
         scheduleHref={SCHEDULE_CHECKOUT_URL}
       />
 

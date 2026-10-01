@@ -24,7 +24,10 @@ export function UpsellDialog({
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  /** Checkout da oferta completa, para quem aceita. */
+  /**
+   * Checkout do upsell: a oferta que junta o cronograma aos 117 exercicios.
+   * Nao e a mesma do cartao principal — esta serve so este caminho.
+   */
   fullHref: string;
   /** Checkout do cronograma, para quem recusa. */
   scheduleHref: string;
