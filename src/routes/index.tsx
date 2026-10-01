@@ -131,7 +131,7 @@ const offer = {
  * de compra a apontar para lado nenhum perde a venda e ainda queima a
  * confianca de quem clicou. Preencher com o link do Ticto para a publicar.
  */
-const SCHEDULE_CHECKOUT_URL = "";
+const SCHEDULE_CHECKOUT_URL = "https://payment.ticto.app/O786A2996";
 
 /**
  * A oferta de entrada.
