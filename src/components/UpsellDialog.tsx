@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Check, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { PRICES, UPGRADE_DIFFERENCE, formatBRL } from "@/lib/pricing";
 
@@ -40,7 +40,12 @@ export function UpsellDialog({
         >
           <div className="plan-featured rounded-3xl p-7 text-center sm:p-8">
             <span className="eyebrow inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-[10px] font-bold text-primary">
-              <Sparkles className="size-3.5" /> Espere um instante
+              {/* Emoji em vez de icone: o fogo colorido puxa mais o olho no
+                  topo do pop-up do que um tracado monocromatico. */}
+              <span aria-hidden="true" className="text-sm leading-none">
+                🔥
+              </span>{" "}
+              Espere um instante
             </span>
 
             <Dialog.Title className="font-display mt-5 text-2xl font-extrabold leading-tight text-foreground sm:text-[1.75rem]">
