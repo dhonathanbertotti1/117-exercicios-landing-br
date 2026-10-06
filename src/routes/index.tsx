@@ -390,8 +390,8 @@ function Index() {
                   <img
                     src={b.img}
                     alt={b.title}
-                    width={800}
-                    height={600}
+                    width={760}
+                    height={570}
                     loading="lazy"
                     className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />

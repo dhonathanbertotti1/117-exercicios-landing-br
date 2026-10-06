@@ -96,8 +96,8 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <img
           src={t.img}
           alt={`Foto de ${t.name}`}
-          width={512}
-          height={512}
+          width={128}
+          height={128}
           loading="lazy"
           className="size-11 shrink-0 rounded-full object-cover ring-2 ring-primary/30"
         />
