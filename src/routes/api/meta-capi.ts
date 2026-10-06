@@ -10,7 +10,7 @@ import { createFileRoute } from "@tanstack/react-router";
  * iOS deitam fora.
  *
  * Configuracao (Vercel > Settings > Environment Variables):
- *   META_CAPI_PIXEL_1 = 2159523891309098
+ *   META_CAPI_PIXEL_1 = 1540545657559371
  *   META_CAPI_TOKEN_1 = <token da API de Conversoes>
  *
  * Sem estas variaveis o site funciona na mesma, apenas sem eventos

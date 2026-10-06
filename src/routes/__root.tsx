@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 /** ID do Meta Pixel. Dispara o PageView no browser. */
-const META_PIXEL_ID = "2159523891309098";
+const META_PIXEL_ID = "1540545657559371";
 
 /**
  * ID do pixel da UTMify.
