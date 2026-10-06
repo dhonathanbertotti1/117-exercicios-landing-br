@@ -35,7 +35,10 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+// O router passa o erro como `unknown`: pode vir de qualquer sitio, nao e
+// garantido ser uma Error. So o registamos, por isso nao precisamos de o
+// estreitar — a pagina mostra sempre a mesma mensagem.
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   console.error(error);
   const router = useRouter();
 
