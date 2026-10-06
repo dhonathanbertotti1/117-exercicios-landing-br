@@ -26,7 +26,19 @@ export default defineConfig({
       prerender: { enabled: true, failOnError: true },
       pages: [{ path: "/", prerender: { enabled: true } }],
     }),
-    nitro(),
+    nitro({
+      routeRules: {
+        // O HTML revalida a cada visita: assim um deploy novo chega na hora,
+        // sem ninguem ficar preso numa versao antiga guardada no browser.
+        //
+        // Isto vale SO para o documento. Os ficheiros em /assets tem hash no
+        // nome e continuam com cache de um ano (regra que o preset da Vercel
+        // ja escreve): se fossem revalidados tambem, cada visita voltaria a
+        // descarregar o JS, o CSS e as imagens todas — o contrario do que se
+        // quer numa pagina que precisa de abrir depressa no 4G.
+        "/": { headers: { "cache-control": "public, max-age=0, must-revalidate" } },
+      },
+    }),
     viteReact(),
   ],
 });
