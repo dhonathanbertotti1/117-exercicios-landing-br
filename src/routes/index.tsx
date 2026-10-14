@@ -141,7 +141,7 @@ const SCHEDULE_CHECKOUT_URL = "https://payment.ticto.app/O786A2996";
  * clica no cartao de cima compra so o pacote completo, noutra oferta.
  * Trocar um pelo outro vende a coisa errada, por isso sao duas constantes.
  */
-const UPGRADE_CHECKOUT_URL = "https://payment.ticto.app/O3BB8B683";
+const UPGRADE_CHECKOUT_URL = "https://payment.ticto.app/OBD8E7BDD";
 
 /**
  * A oferta de entrada.
