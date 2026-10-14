@@ -43,10 +43,9 @@ export const Route = createFileRoute("/")({
 });
 
 const heroBullets = [
-  "117 exercícios prontos para usar para variar os seus treinos sem repetir o mesmo movimento durante meses",
-  "Organizado por categoria — você sabe exatamente o que treinar hoje",
-  "3 fases de evolução: da mobilidade básica ao desempenho",
-  "Séries, repetições e descanso já calculados — excelente para iniciantes",
+  "117 exercícios, sem repetir movimento",
+  "Séries, repetições e descanso já definidos",
+  "Ideal para iniciantes",
 ];
 
 /** Numeros que sustentam a promessa. Todos saem do proprio material. */
@@ -64,17 +63,17 @@ const categorias = [
   {
     numeral: "01",
     title: "Mobilidade Articular",
-    text: "Pare de sentir as articulações travadas. Devolva amplitude de movimento ao ombro, quadril e coluna com controle — para se mover sem dores no dia a dia e no treino.",
+    text: "Destrave ombro, quadril e coluna e volte a se mover sem dor.",
   },
   {
     numeral: "02",
     title: "Estabilidade e Controle",
-    text: "Mobilidade sem estabilidade dá lesão. Desenvolva o controle motor que sustenta cada movimento, melhorando o equilíbrio e a postura.",
+    text: "Ganhe controle, equilíbrio e postura para não se lesionar.",
   },
   {
     numeral: "03",
     title: "Mobilidade e Desempenho",
-    text: "A fase final: junte mobilidade e força para treinar mais pesado, com mais amplitude e menos risco de lesão.",
+    text: "Junte mobilidade e força para treinar mais pesado, com segurança.",
   },
 ];
 
@@ -83,21 +82,21 @@ const bonus = [
     tag: "Bônus #1",
     img: bonusLowCarb,
     title: "Plano de Emagrecimento e Definição",
-    text: "Um plano completo para acelerar a queima de gordura e definir o corpo, com orientações práticas de treino e alimentação.",
+    text: "Treino e alimentação para queimar gordura e definir.",
     price: BONUS_PRICES.emagrecimento,
   },
   {
     tag: "Bônus #2",
     img: bonusAnabolica,
     title: "Guia de Treino para CORE",
-    text: "Fortaleça o centro do seu corpo com treinos focados no CORE, melhorando a postura, o equilíbrio e o desempenho nos exercícios.",
+    text: "Abdômen e lombar fortes para mais postura e equilíbrio.",
     price: BONUS_PRICES.core,
   },
   {
     tag: "Bônus #3",
     img: bonusSaudavel,
     title: "40 Planos de Treino Pesado",
-    text: "40 planos de treino pesado prontos para usar para variar os seus treinos e continuar evoluindo em força e hipertrofia.",
+    text: "Treinos prontos para seguir evoluindo em força e hipertrofia.",
     price: BONUS_PRICES.treinoPesado,
   },
 ];
@@ -142,7 +141,7 @@ const SCHEDULE_CHECKOUT_URL = "https://payment.ticto.app/O786A2996";
  * clica no cartao de cima compra so o pacote completo, noutra oferta.
  * Trocar um pelo outro vende a coisa errada, por isso sao duas constantes.
  */
-const UPGRADE_CHECKOUT_URL = "https://payment.ticto.app/O274ED8C9";
+const UPGRADE_CHECKOUT_URL = "https://payment.ticto.app/O3BB8B683";
 
 /**
  * A oferta de entrada.
@@ -159,7 +158,7 @@ const scheduleOffer = {
      mas que so fica cheio com os exercicios. E o que prepara o upsell do
      pop-up sem prometer nada que o material nao tenha. */
   description:
-    "A sua semana de mobilidade organizada: o que treinar em cada dia, sem ter de decidir nada. O cronograma monta a rotina — os 117 exercícios são o que preenche cada dia dela.",
+    "O que treinar em cada dia da semana, já organizado. Não inclui os 117 exercícios.",
   items: [
     { label: "Cronograma Semanal de Mobilidade", included: true },
     { label: "Acesso imediato", included: true },
@@ -243,27 +242,26 @@ function Index() {
       <StickyCta />
 
       {/* HERO — duas colunas no desktop: o texto conduz, o livro ancora. */}
-      <section className="section-glow overflow-hidden px-6 pb-16 pt-12 md:pb-24 md:pt-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+      <section className="section-glow overflow-hidden px-6 pb-12 pt-8 md:pb-20 md:pt-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
           <div className="text-center lg:text-left">
             <Eyebrow>
               <span className="inline-block size-1.5 rounded-full bg-primary" />
               Oferta especial · {HEADLINE_DISCOUNT}% de desconto
             </Eyebrow>
 
-            <h1 className="font-display mt-7 text-[2.5rem] font-extrabold leading-[1.04] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            <h1 className="font-display mt-5 text-[1.9rem] font-extrabold leading-[1.08] text-foreground sm:text-[2.6rem] lg:text-5xl">
               Recupere a mobilidade do seu corpo em poucas semanas
-              <span className="mt-3 block text-primary">sem equipamento, sem academia</span>
+              <span className="mt-2 block text-primary">sem equipamento, sem academia</span>
             </h1>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground lg:mx-0 md:text-lg">
-              Um guia em PDF com{" "}
-              <strong className="font-bold text-foreground">117 exercícios</strong>, séries,
-              repetições e intervalos já definidos. É só abrir e seguir. Acesso imediato após a
-              compra.
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:mx-0 md:text-lg">
+              Guia em PDF com{" "}
+              <strong className="font-bold text-foreground">117 exercícios</strong> prontos. É só
+              abrir e seguir.
             </p>
 
-            <ul className="mx-auto mt-8 max-w-xl space-y-3.5 text-left lg:mx-0">
+            <ul className="mx-auto mt-6 w-fit max-w-xl space-y-2.5 text-left lg:mx-0">
               {heroBullets.map((b, i) => (
                 <Reveal key={b} delay={i * 90}>
                   <li className="flex items-start gap-3 text-sm leading-relaxed text-foreground/90 md:text-base">
@@ -276,17 +274,9 @@ function Index() {
               ))}
             </ul>
 
-            <div className="mt-10 flex flex-col items-center gap-5 lg:items-start">
-              <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
-                <CtaButton>Quero acessar o material</CtaButton>
-                <p className="text-sm text-muted-foreground">
-                  por{" "}
-                  <strong className="font-display text-lg font-extrabold text-foreground">
-                    {formatBRL(PRICES.offer)}
-                  </strong>{" "}
-                  <span className="line-through">{formatBRL(PRICES.offerAnchor)}</span>
-                </p>
-              </div>
+            {/* Sem preco no hero: o valor so aparece na secao de oferta. */}
+            <div className="mt-7 flex flex-col items-center gap-4 lg:items-start">
+              <CtaButton>Quero acessar o material</CtaButton>
               <div className="lg:[&>ul]:justify-start">
                 <TrustRow />
               </div>
@@ -334,13 +324,13 @@ function Index() {
               Três fases, do travado ao <span className="text-primary">desempenho</span>
             </>
           }
-          lead="Exercícios independentes, sem repetição, organizados por categoria — com séries, repetições e descanso reunidos num material visual. Você abre e sabe o que treinar hoje."
+          lead="Você abre e sabe exatamente o que treinar hoje."
         />
 
         <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-3">
           {categorias.map((c, i) => (
             <Reveal key={c.title} delay={i * 120} className="h-full">
-              <article className="group relative h-full overflow-hidden rounded-2xl border border-hairline bg-elev-1 p-8 transition-colors duration-300 hover:border-primary/35">
+              <article className="group relative h-full overflow-hidden rounded-2xl border border-hairline bg-elev-1 p-6 transition-colors duration-300 hover:border-primary/35">
                 {/* Numeral vazado dentro da caixa: encostado ao canto mas sem
                     sair dela, senao o overflow-hidden do cartao corta-o. */}
                 <span className="ghost-numeral pointer-events-none absolute right-5 top-4 text-[4.5rem] transition-transform duration-500 group-hover:-translate-y-1">
@@ -379,7 +369,7 @@ function Index() {
               +3 bônus para quem adquirir <span className="text-primary">hoje</span>
             </>
           }
-          lead="Além do material principal, você recebe acesso imediato a estes bônus — todos inclusos, sem custo extra."
+          lead="Todos inclusos, sem custo extra."
         />
 
         <div className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-3">

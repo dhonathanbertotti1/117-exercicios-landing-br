@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { PRICES, formatBRL } from "@/lib/pricing";
-
 /**
  * Barra de compra fixa no rodape, no celular.
  *
@@ -37,13 +35,9 @@ export function StickyCta() {
     <div className={`sticky-cta ${visible ? "is-visible" : ""}`} aria-hidden={!visible}>
       <div className="min-w-0">
         <p className="eyebrow text-[9px] font-bold text-primary">Acesso Completo</p>
-        <p className="mt-0.5 flex items-baseline gap-2">
-          <span className="font-display text-xl font-extrabold leading-none text-foreground">
-            {formatBRL(PRICES.offer)}
-          </span>
-          <span className="text-xs font-semibold text-muted-foreground line-through">
-            {formatBRL(PRICES.offerAnchor)}
-          </span>
+        {/* Sem preco: o valor so aparece na secao de oferta. */}
+        <p className="font-display mt-1 whitespace-nowrap text-sm font-extrabold leading-tight text-foreground">
+          117 exercícios + 3 bônus
         </p>
       </div>
       <a

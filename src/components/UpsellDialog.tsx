@@ -77,7 +77,7 @@ export function UpsellDialog({
 
             <p className="mt-6 flex items-baseline justify-center gap-2">
               <span className="font-display text-4xl font-extrabold leading-none text-foreground">
-                {formatBRL(PRICES.offer)}
+                {formatBRL(PRICES.upgrade)}
               </span>
               <span className="text-sm font-bold text-muted-foreground line-through">
                 {formatBRL(PRICES.offerAnchor)}
@@ -91,13 +91,12 @@ export function UpsellDialog({
               Adicionar os 117 exercícios
             </a>
 
-            {/* A recusa: pequena e apagada, como pedido, mas continua a ser um
-                link a serio — sublinhado, com area de toque suficiente e a
-                escurecer no hover, para quem a procura a encontrar. Leva mesmo
-                ao checkout de R$ 9,90, sem desvios. */}
+            {/* A recusa: pequena, mas em branco e legivel — sublinhada e com
+                area de toque suficiente. Leva mesmo ao checkout de R$ 9,90,
+                sem desvios. */}
             <a
               href={scheduleHref}
-              className="mx-auto mt-4 block w-fit px-2 py-1 text-[10px] text-destructive/40 underline underline-offset-2 transition-colors duration-200 hover:text-destructive/80"
+              className="mx-auto mt-4 block w-fit px-2 py-1.5 text-xs text-white underline underline-offset-2"
             >
               Não quero, seguir só com o cronograma
             </a>

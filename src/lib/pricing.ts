@@ -19,15 +19,21 @@ export const PRICES = {
    * dentro da propria pagina.
    */
   schedule: 9.9,
+  /**
+   * Total do upsell do pop-up: cronograma + 117 exercicios + 3 bonus. E uma
+   * oferta propria, mais barata que a principal, so para quem veio pelo
+   * cronograma.
+   */
+  upgrade: 19.9,
 } as const;
 
 /**
- * Quanto custa subir da oferta de entrada para a completa.
+ * Quanto custa subir da oferta de entrada para o upsell do pop-up.
  *
- * E este numero que o pop-up de upsell mostra. Calculado, nunca escrito a
- * mao: se um dos dois precos mudar, a frase do pop-up acompanha.
+ * E este numero que o pop-up mostra. Calculado, nunca escrito a mao: se um
+ * dos dois precos mudar, a frase do pop-up acompanha.
  */
-export const UPGRADE_DIFFERENCE = PRICES.offer - PRICES.schedule;
+export const UPGRADE_DIFFERENCE = PRICES.upgrade - PRICES.schedule;
 
 /** Valor de cada bonus. O total anunciado e a soma destes, nunca um numero a parte. */
 export const BONUS_PRICES = {
