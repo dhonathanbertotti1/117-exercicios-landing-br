@@ -589,3 +589,22 @@ html {
     opacity: 0;
   }
 }
+
+/* Selo de garantia: so o anel de texto gira. */
+.seal-ring {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  animation: seal-spin 28s linear infinite;
+}
+
+@keyframes seal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-ring {
+    animation: none;
+  }
+}

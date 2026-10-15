@@ -18,6 +18,7 @@ import { CountUp } from "@/components/CountUp";
 import { StickyCta } from "@/components/StickyCta";
 import { Testimonials } from "@/components/Testimonials";
 import { UpsellDialog } from "@/components/UpsellDialog";
+import { GuaranteeSeal } from "@/components/GuaranteeSeal";
 import bonusLowCarb from "@/assets/bonus-lowcarb.jpg";
 import bonusAnabolica from "@/assets/bonus-anabolica.jpg";
 import bonusSaudavel from "@/assets/bonus-saudavel.jpg";
@@ -157,8 +158,7 @@ const scheduleOffer = {
   /* A descricao posiciona o cronograma como o mapa da semana: util por si so,
      mas que so fica cheio com os exercicios. E o que prepara o upsell do
      pop-up sem prometer nada que o material nao tenha. */
-  description:
-    "O que treinar em cada dia da semana, já organizado. Não inclui os 117 exercícios.",
+  description: "O que treinar em cada dia da semana, já organizado. Não inclui os 117 exercícios.",
   items: [
     { label: "Cronograma Semanal de Mobilidade", included: true },
     { label: "Acesso imediato", included: true },
@@ -252,13 +252,14 @@ function Index() {
 
             <h1 className="font-display mt-5 text-[1.6rem] font-extrabold leading-[1.1] text-foreground sm:text-[2rem] lg:text-[2.5rem]">
               Recupere a mobilidade do seu corpo em poucas semanas
-              <span className="mt-1.5 block text-[0.85em] text-primary">sem equipamento, sem academia</span>
+              <span className="mt-1.5 block text-[0.85em] text-primary">
+                sem equipamento, sem academia
+              </span>
             </h1>
 
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:mx-0 md:text-lg">
-              Guia em PDF com{" "}
-              <strong className="font-bold text-foreground">117 exercícios</strong> prontos. É só
-              abrir e seguir.
+              Guia em PDF com <strong className="font-bold text-foreground">117 exercícios</strong>{" "}
+              prontos. É só abrir e seguir.
             </p>
 
             <ul className="mx-auto mt-6 w-fit max-w-xl space-y-2.5 text-left lg:mx-0">
@@ -550,21 +551,32 @@ function Index() {
         scheduleHref={SCHEDULE_CHECKOUT_URL}
       />
 
-      {/* GARANTIA */}
+      {/* GARANTIA — selo grande, centrado, com os tres pontos que tiram o risco. */}
       <section className="px-6 pb-20 md:pb-28">
         <div className="mx-auto max-w-4xl">
-          <div className="flex flex-col items-center gap-6 rounded-3xl border border-primary/25 bg-gradient-to-br from-primary/12 to-transparent px-8 py-10 text-center md:flex-row md:text-left">
-            <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-primary/15 ring-1 ring-primary/25">
-              <ShieldCheck className="size-8 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-display text-2xl font-extrabold text-foreground">
+          <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-b from-gold/10 via-elev-1 to-elev-1 px-6 py-12 text-center md:flex md:items-center md:gap-12 md:px-12 md:text-left">
+            <GuaranteeSeal className="mx-auto w-44 shrink-0 drop-shadow-[0_18px_40px_rgba(227,179,76,0.25)] md:mx-0 md:w-52" />
+            <div className="mt-8 md:mt-0">
+              <p className="eyebrow text-[11px] font-bold text-gold">Risco zero</p>
+              <h3 className="font-display mt-3 text-2xl font-extrabold leading-tight text-foreground md:text-3xl">
                 Garantia incondicional de 7 dias
               </h3>
-              <p className="mt-2 leading-relaxed text-muted-foreground">
-                Não gostou? Peça o reembolso dentro do prazo e devolvemos 100% do valor, sem
-                perguntas. O risco é todo nosso.
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                Teste o material por 7 dias. Se não gostar, por qualquer motivo, devolvemos 100% do
+                seu dinheiro.
               </p>
+              <ul className="mx-auto mt-6 w-fit space-y-2.5 text-left md:mx-0">
+                {[
+                  "Reembolso de 100% do valor",
+                  "Sem perguntas e sem burocracia",
+                  "Basta pedir dentro dos 7 dias",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/90">
+                    <ShieldCheck className="size-[18px] shrink-0 text-gold" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
