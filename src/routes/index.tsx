@@ -250,9 +250,9 @@ function Index() {
               Oferta especial · {HEADLINE_DISCOUNT}% de desconto
             </Eyebrow>
 
-            <h1 className="font-display mt-5 text-[1.9rem] font-extrabold leading-[1.08] text-foreground sm:text-[2.6rem] lg:text-5xl">
+            <h1 className="font-display mt-5 text-[1.6rem] font-extrabold leading-[1.1] text-foreground sm:text-[2rem] lg:text-[2.5rem]">
               Recupere a mobilidade do seu corpo em poucas semanas
-              <span className="mt-2 block text-primary">sem equipamento, sem academia</span>
+              <span className="mt-1.5 block text-[0.85em] text-primary">sem equipamento, sem academia</span>
             </h1>
 
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:mx-0 md:text-lg">
