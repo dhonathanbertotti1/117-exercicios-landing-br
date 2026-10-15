@@ -7,28 +7,12 @@ const faqs = [
     a: "Assim que o pagamento é confirmado, você recebe o acesso imediato por WhatsApp e e-mail, com o link para baixar o material em PDF.",
   },
   {
-    q: "O pagamento é único ou mensal?",
-    a: "É pagamento único. Você paga uma vez e fica com acesso vitalício ao material, sem mensalidades nem cobranças recorrentes.",
-  },
-  {
-    q: "Preciso de equipamento para fazer os exercícios?",
-    a: "Não. A grande maioria dos exercícios usa apenas o peso do corpo e pode ser feita em casa, sem equipamento especial.",
-  },
-  {
     q: "Serve para iniciantes?",
     a: "Sim. Os exercícios estão organizados por categoria e vêm com séries, repetições e intervalos indicados, o que facilita a execução mesmo para quem está começando.",
   },
   {
     q: "Serve para qualquer idade ou se eu já tiver alguma lesão?",
     a: "Os exercícios são de baixo impacto e podem ser adaptados. Se você tem uma lesão específica, recomendamos que consulte um profissional de saúde antes de começar.",
-  },
-  {
-    q: "Quanto tempo por dia preciso dedicar?",
-    a: "A maioria dos treinos leva entre 15 e 30 minutos, encaixando na rotina mesmo de quem tem pouco tempo livre.",
-  },
-  {
-    q: "O que exatamente vem no pacote?",
-    a: "Vem o material completo com os 117 exercícios mais os 3 bônus: Plano de Emagrecimento e Definição, Guia de Treino para CORE e 40 Planos de Treino Pesado. Não há versão reduzida nem upgrade a pagar depois — é tudo num pagamento só.",
   },
   {
     q: "E se eu não gostar do material?",
