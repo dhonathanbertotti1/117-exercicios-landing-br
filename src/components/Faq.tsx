@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "Como recebo o material após a compra?",
-    a: "Assim que o pagamento é confirmado, você recebe o acesso imediato por WhatsApp e e-mail, com o link para baixar o material em PDF.",
+    a: "Assim que o pagamento é confirmado, você recebe o acesso imediato por WhatsApp e e-mail, com o acesso às mais de 120 aulas em vídeo e ao guia em PDF.",
   },
   {
     q: "Serve para iniciantes?",

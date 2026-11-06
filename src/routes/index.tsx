@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Lock, Gift, Star, ShieldCheck, Zap, Clock, Layers, Ban } from "lucide-react";
+import { Check, Lock, Gift, Star, ShieldCheck, Zap, Clock, Layers, CirclePlay } from "lucide-react";
 import { SalesNotification } from "@/components/SalesNotification";
 import {
   PRICES,
@@ -30,13 +30,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Recupere a mobilidade do seu corpo em poucas semanas. Guia em PDF com 117 exercícios, séries, repetições e intervalos prontos para usar. Acesso imediato.",
+          "Recupere a mobilidade do seu corpo em poucas semanas. Guia em PDF + mais de 120 aulas em vídeo com 117 exercícios, séries, repetições e intervalos prontos para usar. Acesso imediato.",
       },
       { property: "og:title", content: "117 Exercícios de Mobilidade e Estabilidade" },
       {
         property: "og:description",
         content:
-          "Recupere a mobilidade do seu corpo em poucas semanas. 117 exercícios prontos para usar, sem equipamento e sem academia.",
+          "Recupere a mobilidade do seu corpo em poucas semanas. Guia em PDF + mais de 120 aulas em vídeo, sem equipamento e sem academia.",
       },
     ],
   }),
@@ -57,7 +57,7 @@ const stats = [
   { icon: Layers, value: "117", countTo: 117, label: "exercícios únicos, sem repetição" },
   { icon: Zap, value: "3", countTo: 3, label: "fases, da base ao desempenho" },
   { icon: Clock, value: "15–30", label: "minutos por treino" },
-  { icon: Ban, value: "0", label: "equipamentos necessários" },
+  { icon: CirclePlay, value: "120+", label: "aulas em vídeo com o professor" },
 ] as const;
 
 const categorias = [
@@ -105,6 +105,7 @@ const bonus = [
 /** O que vai dentro do pacote, na ordem em que aparece no cartao. */
 const included = [
   "117 Exercícios de Mobilidade e Estabilidade",
+  "Mais de 120 aulas em vídeo com o professor",
   "Plano de Emagrecimento e Definição",
   "Guia de Treino para CORE",
   "40 Planos de Treino Pesado",
@@ -164,6 +165,7 @@ const scheduleOffer = {
     { label: "Acesso imediato", included: true },
     { label: "Garantia de 7 dias", included: true },
     { label: "117 Exercícios de Mobilidade e Estabilidade", included: false },
+    { label: "Mais de 120 aulas em vídeo", included: false },
     { label: "Plano de Emagrecimento e Definição", included: false },
     { label: "Guia de Treino para CORE", included: false },
     { label: "40 Planos de Treino Pesado", included: false },
@@ -258,8 +260,9 @@ function Index() {
             </h1>
 
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground lg:mx-0 md:text-lg">
-              Guia em PDF com <strong className="font-bold text-foreground">117 exercícios</strong>{" "}
-              prontos. É só abrir e seguir.
+              Guia em PDF +{" "}
+              <strong className="font-bold text-foreground">mais de 120 aulas em vídeo</strong> com
+              os 117 exercícios. É só dar play e seguir.
             </p>
 
             <ul className="mx-auto mt-6 w-fit max-w-xl space-y-2.5 text-left lg:mx-0">
@@ -325,7 +328,7 @@ function Index() {
               Três fases, do travado ao <span className="text-primary">desempenho</span>
             </>
           }
-          lead="Você abre e sabe exatamente o que treinar hoje."
+          lead="Cada exercício explicado em vídeo pelo professor. Você sabe exatamente o que treinar hoje."
         />
 
         <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-3">
